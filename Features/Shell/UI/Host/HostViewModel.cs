@@ -3,14 +3,14 @@ using System.Reactive;
 using KrolikGR.Core.Mvvm;
 using ReactiveUI;
 
-namespace KrolikGR.Features.Shell.UI.Shell;
+namespace KrolikGR.Features.Shell.UI.Host;
 
-public class ShellViewModel : ViewModelBase
+public class HostViewModel : ViewModelBase
 {
 
 
     public RoutingState Router { get; }
-    public ShellViewModel(RoutingState router)
+    public HostViewModel(RoutingState router)
     {
         Router = router;
        

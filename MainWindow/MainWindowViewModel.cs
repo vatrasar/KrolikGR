@@ -1,19 +1,19 @@
-﻿namespace KrolikGR;
+namespace KrolikGR;
 using KrolikGR.Core.Mvvm;
-using KrolikGR.Features.Shell.UI.Shell;
+using KrolikGR.Features.Shell.UI.Host;
 using KrolikGR.Infrastructure;
 
 public partial class MainWindowViewModel : ViewModelBase
 {
     AppBootstrapper _appBootstrapper;
-    public ShellViewModel ShellViewModel
+    public HostViewModel HostViewModel
     {
         get;
     }
     public MainWindowViewModel()
     {
         _appBootstrapper = new AppBootstrapper();
-        ShellViewModel = new ShellViewModel(_appBootstrapper.Router);
+        HostViewModel = new HostViewModel(_appBootstrapper.Router);
     }
     
 }

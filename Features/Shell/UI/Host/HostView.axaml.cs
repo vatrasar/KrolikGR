@@ -5,12 +5,12 @@ using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using ReactiveUI;
 
-namespace KrolikGR.Features.Shell.UI.Shell;
+namespace KrolikGR.Features.Shell.UI.Host;
 
-public partial class ShellView : ReactiveUserControl<ShellViewModel>
+public partial class HostView : ReactiveUserControl<HostViewModel>
 {
 
-    public ShellView()
+    public HostView()
     {
         InitializeComponent();
         this.WhenActivated(disposables => 
