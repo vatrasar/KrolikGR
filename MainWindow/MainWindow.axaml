@@ -1,0 +1,16 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:module="using:KrolikGR"
+        xmlns:rxui="http://reactiveui.net"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:shell="using:KrolikGR.Features.Shell.UI.Shell"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="KrolikGR.MainWindow"
+        x:DataType="module:MainWindowViewModel"
+        Icon="/Assets/avalonia-logo.ico"
+        Title="KrolikGR">
+
+        <shell:ShellView DataContext="{Binding ShellViewModel}"/>
+
+</Window>

@@ -1,0 +1,19 @@
+<rxui:ReactiveUserControl x:TypeArguments="shell:ShellViewModel"
+                    x:DataType="vm:ShellViewModel"
+                     xmlns="https://github.com/avaloniaui"
+                     xmlns:shell="using:KrolikGR.Features.Shell.UI.Shell"
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                     xmlns:vm="using:KrolikGR.Features.Shell.UI.Shell"
+                     xmlns:rxui="http://reactiveui.net"
+                     x:Class="KrolikGR.Features.Shell.UI.Shell.ShellView"
+                     >
+                     
+        <rxui:RoutedViewHost Router="{Binding Router}">
+            <rxui:RoutedViewHost.DefaultContent>
+                <TextBlock Text="Ładowanie..." 
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center" 
+                />
+            </rxui:RoutedViewHost.DefaultContent>
+        </rxui:RoutedViewHost>
+</rxui:ReactiveUserControl>

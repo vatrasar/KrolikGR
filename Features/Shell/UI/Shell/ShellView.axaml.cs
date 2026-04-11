@@ -1,0 +1,22 @@
+using System;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
+using ReactiveUI;
+
+namespace KrolikGR.Features.Shell.UI.Shell;
+
+public partial class ShellView : ReactiveUserControl<ShellViewModel>
+{
+
+    public ShellView()
+    {
+        InitializeComponent();
+        this.WhenActivated(disposables => 
+        { 
+            
+        });
+    }
+
+}
