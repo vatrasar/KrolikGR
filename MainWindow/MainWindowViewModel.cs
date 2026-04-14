@@ -1,7 +1,7 @@
 namespace KrolikGR;
-using KrolikGR.Core.Mvvm;
-using KrolikGR.Features.Shell.UI.Host;
-using KrolikGR.Infrastructure;
+using KrolikGR.Src.Core.Mvvm;
+using KrolikGR.Src.Features.Shell.UI.Host;
+using KrolikGR.Src.Infrastructure;
 
 public partial class MainWindowViewModel : ViewModelBase
 {

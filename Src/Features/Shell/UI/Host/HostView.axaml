@@ -1,11 +1,11 @@
 <rxui:ReactiveUserControl x:TypeArguments="host:HostViewModel"
                     x:DataType="vm:HostViewModel"
                      xmlns="https://github.com/avaloniaui"
-                     xmlns:host="using:KrolikGR.Features.Shell.UI.Host"
+                     xmlns:host="using:KrolikGR.Src.Features.Shell.UI.Host"
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                     xmlns:vm="using:KrolikGR.Features.Shell.UI.Host"
+                     xmlns:vm="using:KrolikGR.Src.Features.Shell.UI.Host"
                      xmlns:rxui="http://reactiveui.net"
-                     x:Class="KrolikGR.Features.Shell.UI.Host.HostView"
+                     x:Class="KrolikGR.Src.Features.Shell.UI.Host.HostView"
                      >
                      
         <rxui:RoutedViewHost Router="{Binding Router}">

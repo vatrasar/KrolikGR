@@ -1,6 +1,6 @@
 using Splat;
 
-namespace KrolikGR.Core.Infrastructure;
+namespace KrolikGR.Src.Core.Infrastructure;
 
 public interface IFeatureModule
 {

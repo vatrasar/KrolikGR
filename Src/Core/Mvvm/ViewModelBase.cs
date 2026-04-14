@@ -1,7 +1,7 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using ReactiveUI;
 
-namespace KrolikGR.Core.Mvvm;
+namespace KrolikGR.Src.Core.Mvvm;
 
 
 public abstract class ViewModelBase : ReactiveObject

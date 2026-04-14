@@ -5,7 +5,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using ReactiveUI;
 
-namespace KrolikGR.Features.Shell.UI.Host;
+namespace KrolikGR.Src.Features.Shell.UI.Host;
 
 public partial class HostView : ReactiveUserControl<HostViewModel>
 {

@@ -2,7 +2,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using Avalonia.Controls;
 using Avalonia.Controls.Templates;
-using KrolikGR.Core.Mvvm;
+using KrolikGR.Src.Core.Mvvm;
 
 
 namespace KrolikGR;

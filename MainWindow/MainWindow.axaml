@@ -4,7 +4,7 @@
         xmlns:rxui="http://reactiveui.net"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:host="using:KrolikGR.Features.Shell.UI.Host"
+        xmlns:host="using:KrolikGR.Src.Features.Shell.UI.Host"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="KrolikGR.MainWindow"
         x:DataType="module:MainWindowViewModel"

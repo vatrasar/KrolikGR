@@ -1,10 +1,10 @@
-using KrolikGR.Core.Infrastructure;
-using KrolikGR.Features.Shell;
+using KrolikGR.Src.Core.Infrastructure;
+using KrolikGR.Src.Features.Shell;
 using ReactiveUI;
 using Splat;
 using System.Collections.Generic;
 
-namespace KrolikGR.Infrastructure;
+namespace KrolikGR.Src.Infrastructure;
 
 public class AppBootstrapper : ReactiveObject, IScreen
 {

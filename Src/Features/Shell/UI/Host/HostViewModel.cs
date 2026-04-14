@@ -1,9 +1,9 @@
 using System;
 using System.Reactive;
-using KrolikGR.Core.Mvvm;
+using KrolikGR.Src.Core.Mvvm;
 using ReactiveUI;
 
-namespace KrolikGR.Features.Shell.UI.Host;
+namespace KrolikGR.Src.Features.Shell.UI.Host;
 
 public class HostViewModel : ViewModelBase
 {

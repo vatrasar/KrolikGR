@@ -23,15 +23,17 @@ NameViewModel.cs, NameView.axaml.cs, NameView.axaml.
 So, for example, when I say "screen malpa", I mean the files MalpaViewModel.cs, MalpaView.axaml.cs, and MalpaView.axaml.
 The files are usually grouped in a single folder and are responsible for the UI of one screen.
 
-# Architecture
+# Folders architecture
 
 
-## Main folders
+## Src
+In this folder, you can find folders in which you will work most often
+
 
 ### Features
 Here we keep folders related to specific features. Each feature must have a separate folder. Inside this folder, there should be the following folders:
 * UI - here should be folders for the screens of the given feature
-* Models - models for the given feature
+* Domain - and in that folder you can add folders for services, models ,usecases and ect if needed
 
 you can also add additional folders (like for example "services" for services related to feature) if needed 
 
@@ -50,6 +52,17 @@ Here you can put some services, models shared by several features, and it also c
 
 rxui:RoutedViewHost (that is, the place where views will change) is located in the shell feature, in the Host screen. The job of MainWindow is just to display the Host screen.
 
+## Assets
+Here you can store things like icons images and ect
+
+## Tests
+here you should place all tests. inside there are folders:
+
+### CoreTests
+here you put tests related to things from Src/Core
+
+### FeaturesTests
+and here in subfolders you put tests realted to each feature (for example tests of services from Malpa feature you should place in folder Tests/FeaturesTests/MalpaTests/ServicesTests
 
 # Routing
 
