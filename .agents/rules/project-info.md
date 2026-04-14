@@ -2,8 +2,8 @@
 trigger: always_on
 ---
 
-#Co to za projekt
-Aplikacja o nazwie KrolikGR. aplikacja ma pomóc w układaniu grafiku w restauracji mcdonald. aplikacja ma być pisana w języku c# przy użyciu frameworków:
+# What is this project
+An application named KrolikGR. The application is meant to help with scheduling in a McDonald's restaurant. The application is to be written in C# using the following frameworks:
 
 {
 
@@ -13,31 +13,107 @@ Aplikacja o nazwie KrolikGR. aplikacja ma pomóc w układaniu grafiku w restaura
 
 }
 
-Ma ona używać routingu z reactiveUI i architektóry folderów typu feature oriented. 
+It is meant to use routing from ReactiveUI and a feature-oriented folder architecture.
 
-#Architektura
-# Screen
-Kiedy będę używał słowa "screen" to mam na myśli 3 pliki
-NazwaViewModel.cs, NazwaView.axaml.cs, NazwaView.axaml.
-czyli np jak mówie "screen malpa" to mam na myśli pliki MalpaViewModel.cs MalpaView.axaml.cs MalpaView.axaml
-pliki są zwykle zgrupowane w jednym folderze i odpowiadają za UI jednego ekranu. 
+# Glossary of terms
+
+## Screen
+When in instruction for you I use the word "screen", I mean 3 files:
+NameViewModel.cs, NameView.axaml.cs, NameView.axaml.
+So, for example, when I say "screen malpa", I mean the files MalpaViewModel.cs, MalpaView.axaml.cs, and MalpaView.axaml.
+The files are usually grouped in a single folder and are responsible for the UI of one screen.
+
+# Architecture
 
 
-## Główne foldery
+## Main folders
 
 ### Features
-Tu trzymamy foldery dotyczące konkretnych feautres. Każdy feature ma mieć odddzielny folder. w tym folderze mają być foldery:
-* UI tutaj mają być foldery dla screenów danego feature
-* models modele danego feature
+Here we keep folders related to specific features. Each feature must have a separate folder. Inside this folder, there should be the following folders:
+* UI - here should be folders for the screens of the given feature
+* Models - models for the given feature
 
-dodatkowo wszystkie features poza feature o nazwie Shell ma mieć plik NazwaModule.cs (czyli np dla feature o nazwie Malpa ma to być plik MalpaModule.cs). w pliku tym ma mieć miejsce rejestracja routes dotyczących danego feature. same moduły są później rejestrowane w pliku AppBootstraper.cs
+you can also add additional folders (like for example "services" for services related to feature) if needed 
+
+Additionally, all features (except the feature named Shell) must have a file named NameModule.cs (e.g., for a feature named Malpa, it should be the file MalpaModule.cs). This file should contain the registration of routes for the given feature. The modules themselves are later registered in the AppBootstrapper.cs file.
 
 ### Infrastructure
-tu mamy dwa pliki AppBootstrapper i IFeatureModule. AppBootstrapper słuzy do rejestracji modułów. w nim jest też routing state. IFeatureModule to interfejs bazowy dla wszystkich modułów. 
+Here we have two files: AppBootstrapper and IFeatureModule. AppBootstrapper is used for registering modules. It also contains the routing state. IFeatureModule is the base interface for all modules.
 
 ### Shared
-najlepiej dawać tam elementy UI które są współdzielone przez wiele features
+It is best to put UI elements here that are shared across multiple features.
 
 ### Core
-Tu można dawać jakieś współdzielone serwisy, modele, i jest tam też viewModelBase.
+Here you can put some services, models shared by several features, and it also contains the ViewModelBase.
 
+## rxui:RoutedViewHost
+
+rxui:RoutedViewHost (that is, the place where views will change) is located in the shell feature, in the Host screen. The job of MainWindow is just to display the Host screen.
+
+
+# Routing
+
+The routing paths for a given feature should be registered in the NameModule.cs file of the given module.
+
+Example:
+For the "Malpa" feature for which the "pies" screen exists, we have the file MalpaModule.cs.
+
+This file should generally look like this:
+
+```cs
+
+// skipping imports
+namespace KrolikGR.Features.Malpa;
+
+  
+
+public class MalpaModule : IFeatureModule
+{
+
+	public void Register(IMutableDependencyResolver services)
+	
+	{
+	
+	     services.Register(() => new PiesView(), typeof(IViewFor<PiesViewModel>));
+	
+	  
+	
+	}
+
+}
+```
+
+Each module should be registered in the AppBootstrapper method.
+
+Example:
+
+```cs
+		var modules = new List<IFeatureModule>
+		
+			{
+			
+			new MalpaModule()
+			
+			};
+
+  
+
+		foreach (var module in modules)
+		
+		{
+		
+			module.Register(Locator.CurrentMutable);
+		
+		}
+```
+
+## Navigation between views
+
+If we want to navigate to the pies view from some viewModel, we do this:
+
+```cs
+Router.Navigate.Execute(new ShellViewModel(Router));
+
+```
+
+where Router is an object of type RoutingState. Every viewModel should have a property containing the router, and it should be passed between viewModels during navigation in the constructor.
