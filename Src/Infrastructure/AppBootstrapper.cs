@@ -2,7 +2,10 @@ using KrolikGR.Src.Core.Infrastructure;
 using KrolikGR.Src.Features.Shell;
 using ReactiveUI;
 using Splat;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace KrolikGR.Src.Infrastructure;
 
@@ -18,14 +21,18 @@ public class AppBootstrapper : ReactiveObject, IScreen
 
     private void RegisterModules()
     {
-        var modules = new List<IFeatureModule>
+        var featureModuleType = typeof(IFeatureModule);
+        var moduleTypes = Assembly.GetExecutingAssembly()
+            .GetTypes()
+            .Where(t => featureModuleType.IsAssignableFrom(t) && !t.IsInterface && !t.IsAbstract);
+
+        foreach (var type in moduleTypes)
         {
             
-        };
-
-        foreach (var module in modules)
-        {
-            module.Register(Locator.CurrentMutable);
+            if (Activator.CreateInstance(type) is IFeatureModule module)
+            {
+                module.Register(Locator.CurrentMutable);
+            }
         }
     }
 }

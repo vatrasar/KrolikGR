@@ -3,6 +3,7 @@ trigger: always_on
 ---
 
 # What is this project
+
 An application named KrolikGR. The application is meant to help with scheduling in a McDonald's restaurant. The application is to be written in C# using the following frameworks:
 
 {
@@ -11,6 +12,8 @@ An application named KrolikGR. The application is meant to help with scheduling 
 
 2. ReactiveUI
 
+3. xUnit
+
 }
 
 It is meant to use routing from ReactiveUI and a feature-oriented folder architecture.
@@ -18,6 +21,7 @@ It is meant to use routing from ReactiveUI and a feature-oriented folder archite
 # Glossary of terms
 
 ## Screen
+
 When in instruction for you I use the word "screen", I mean 3 files:
 NameViewModel.cs, NameView.axaml.cs, NameView.axaml.
 So, for example, when I say "screen malpa", I mean the files MalpaViewModel.cs, MalpaView.axaml.cs, and MalpaView.axaml.
@@ -25,13 +29,14 @@ The files are usually grouped in a single folder and are responsible for the UI 
 
 # Folders architecture
 
-
 ## Src
+
 In this folder, you can find folders in which you will work most often
 
-
 ### Features
+
 Here we keep folders related to specific features. Each feature must have a separate folder. Inside this folder, there should be the following folders:
+
 * UI - here should be folders for the screens of the given feature
 * Domain - and in that folder you can add folders for services, models ,usecases and ect if needed
 
@@ -40,12 +45,15 @@ you can also add additional folders (like for example "services" for services re
 Additionally, all features (except the feature named Shell) must have a file named NameModule.cs (e.g., for a feature named Malpa, it should be the file MalpaModule.cs). This file should contain the registration of routes for the given feature. The modules themselves are later registered in the AppBootstrapper.cs file.
 
 ### Infrastructure
+
 Here we have two files: AppBootstrapper and IFeatureModule. AppBootstrapper is used for registering modules. It also contains the routing state. IFeatureModule is the base interface for all modules.
 
 ### Shared
+
 It is best to put UI elements here that are shared across multiple features.
 
 ### Core
+
 Here you can put some services, models shared by several features, and it also contains the ViewModelBase.
 
 ## rxui:RoutedViewHost
@@ -53,16 +61,20 @@ Here you can put some services, models shared by several features, and it also c
 rxui:RoutedViewHost (that is, the place where views will change) is located in the shell feature, in the Host screen. The job of MainWindow is just to display the Host screen.
 
 ## Assets
+
 Here you can store things like icons images and ect
 
 ## Tests
-here you should place all tests. inside there are folders:
+
+here you should place all tests. inside there is folder KarolinaGR.Tests and inside of this folder there are
 
 ### CoreTests
+
 here you put tests related to things from Src/Core
 
 ### FeaturesTests
-and here in subfolders you put tests realted to each feature (for example tests of services from Malpa feature you should place in folder Tests/FeaturesTests/MalpaTests/ServicesTests
+
+and here in subfolders you put tests realted to each feature (for example tests of services from Malpa feature you should place in folder FeaturesTests/MalpaTests/ServicesTests
 
 # Routing
 
@@ -74,59 +86,55 @@ For the "Malpa" feature for which the "pies" screen exists, we have the file Mal
 This file should generally look like this:
 
 ```cs
-
 // skipping imports
 namespace KrolikGR.Features.Malpa;
 
-  
+
 
 public class MalpaModule : IFeatureModule
 {
 
-	public void Register(IMutableDependencyResolver services)
-	
-	{
-	
-	     services.Register(() => new PiesView(), typeof(IViewFor<PiesViewModel>));
-	
-	  
-	
-	}
+    public void Register(IMutableDependencyResolver services)
+
+    {
+
+         services.Register(() => new PiesView(), typeof(IViewFor<PiesViewModel>));
+
+
+
+    }
 
 }
 ```
 
-Each module should be registered in the AppBootstrapper method.
-
-Example:
-
-```cs
-		var modules = new List<IFeatureModule>
-		
-			{
-			
-			new MalpaModule()
-			
-			};
-
-  
-
-		foreach (var module in modules)
-		
-		{
-		
-			module.Register(Locator.CurrentMutable);
-		
-		}
-```
+Each module is automaticaly register using reflection in AppBootstrapper (you don't have to do it).
 
 ## Navigation between views
 
 If we want to navigate to the pies view from some viewModel, we do this:
 
 ```cs
-Router.Navigate.Execute(new ShellViewModel(Router));
-
+Router.Navigate.Execute(new PiesViewModel(Router));
 ```
 
 where Router is an object of type RoutingState. Every viewModel should have a property containing the router, and it should be passed between viewModels during navigation in the constructor.
+
+# Tests
+
+## Test functions name
+
+when you make testing function you should name them in following way
+
+```csharp
+NameOfTestedFuntion_testCondition_expectedResult
+```
+
+
+
+for example for function GetTimeSlotsList you can have name of testing function like that
+
+
+
+```cs
+GetTimeSlotsList_ForDataWhichArenTSorted_ReturnsSortedTimeSlotList
+```
