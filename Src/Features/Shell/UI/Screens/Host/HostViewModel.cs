@@ -3,9 +3,9 @@ using System.Reactive;
 using KrolikGR.Src.Core.Mvvm;
 using ReactiveUI;
 
-namespace KrolikGR.Src.Features.Shell.UI.Host;
+namespace KrolikGR.Src.Features.Shell.UI.Screens.Host;
 
-public class HostViewModel : ViewModelBase
+public class HostViewModel : ViewModelBase,IScreen
 {
 
 
