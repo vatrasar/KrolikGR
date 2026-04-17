@@ -5,9 +5,55 @@
                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                      xmlns:vm="using:KrolikGR.Src.Features.Shell.UI.Screens.Host"
                      xmlns:rxui="http://reactiveui.net"
+                     xmlns:material="using:Material.Icons.Avalonia"
                      x:Class="KrolikGR.Src.Features.Shell.UI.Screens.Host.HostView"
                      >
                      
+    <UserControl.Styles>
+        <StyleInclude Source="avares://KrolikGR/Src/Features/Shell/UI/Styles/BordersStyles.axaml" />
+        <StyleInclude Source="avares://KrolikGR/Src/Features/Shell/UI/Styles/ButtonsStyles.axaml" />
+        <StyleInclude Source="avares://KrolikGR/Src/Features/Shell/UI/Styles/TextBlocksStyles.axaml" />
+        <StyleInclude Source="avares://KrolikGR/Src/Features/Shell/UI/Styles/MaterialIconsStyles.axaml" />
+    </UserControl.Styles>
+
+    <DockPanel>
+        <Border DockPanel.Dock="Left" 
+                Classes="menuBorder"
+                Classes.collapsed="{Binding IsMenuCollapsed}"
+                BorderBrush="Gray" BorderThickness="0,0,1,0" Padding="10">
+            <StackPanel Spacing="10">
+                <Button Command="{Binding ToggleMenuCommand}" 
+                        Classes="menuButton" 
+                        HorizontalAlignment="Stretch">
+                    <StackPanel Orientation="Horizontal">
+                        <material:MaterialIcon Kind="Menu" Classes="menuIcon" Width="24" Height="24" />
+                        <TextBlock Text="Zwiń / Rozwiń" Classes="menuText" VerticalAlignment="Center" />
+                    </StackPanel>
+                </Button>
+                
+                <Separator Background="LightGray" Margin="0,5" />
+                
+                <Button Classes="menuButton">
+                    <StackPanel Orientation="Horizontal">
+                        <material:MaterialIcon Kind="Home" Classes="menuIcon" Width="24" Height="24" />
+                        <TextBlock Text="Opcja 1 (Test)" Classes="menuText" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                <Button Classes="menuButton">
+                    <StackPanel Orientation="Horizontal">
+                        <material:MaterialIcon Kind="Account" Classes="menuIcon" Width="24" Height="24" />
+                        <TextBlock Text="Opcja 2 (Test)" Classes="menuText" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+                <Button Classes="menuButton">
+                    <StackPanel Orientation="Horizontal">
+                        <material:MaterialIcon Kind="Settings" Classes="menuIcon" Width="24" Height="24" />
+                        <TextBlock Text="Opcja 3 (Test)" Classes="menuText" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Border>
+
         <rxui:RoutedViewHost Router="{Binding Router}">
             <rxui:RoutedViewHost.PageTransition>
                 <CrossFade Duration="0:0:0.250" />
@@ -20,4 +66,5 @@
                 />
             </rxui:RoutedViewHost.DefaultContent>
         </rxui:RoutedViewHost>
+    </DockPanel>
 </rxui:ReactiveUserControl>

@@ -16,4 +16,8 @@ trigger: always_on
 6. Language Requirements
    All naming conventions (variables, functions, classes) and comments within the code must be in English.
 
-7. **Prefer Enums over Constants/Strings:** Whenever a variable can hold a limited set of predefined values (e.g., ShiftType, EmployeeRole, DayOfWeek), **always** use a strongly-typed `enum`. Do not use `string` or `int` constants for these purposes. 
+7. **Prefer Enums over Constants/Strings:** Whenever a variable can hold a limited set of predefined values (e.g., ShiftType, EmployeeRole, DayOfWeek), **always** use a strongly-typed `enum`. Do not use `string` or `int` constants for these purposes.
+
+8. There must be two blank lines separating the last property (or backing field) from the constructor or the first method. This creates a clear visual boundary between the class state and its behavior.
+
+9. Avoid Legacy Patterns. Never suggest deprecated patterns or "old-school" boilerplate if a modern, cleaner alternative exists (e.g., use `ReactiveUI.Fody` instead of manual `RaiseAndSetIfChanged`).

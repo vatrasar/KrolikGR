@@ -198,7 +198,7 @@ Strings used in the application shouldn't be hardcoded in .axaml or .cs files. I
 
 ## resx file
 
-wnętrze pliku resx wygląda przykładowo tak:
+resx file example
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>

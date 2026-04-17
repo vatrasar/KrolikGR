@@ -23,6 +23,13 @@ You have installed Material.Icons.Avalonia and Avalonia.Fluent.Icons so you can 
    <ResourceDictionary.MergedDictionaries> <ResourceInclude Source="avares://KrolikGR/Src/Shared/Styles/ColorResources.axaml" />
    </ResourceDictionary.MergedDictionaries>
 
+
+# Styles separation from views
+* NEVER use inline `<UserControl.Styles>` or `<Window.Styles>` directly inside View files (like UserControl or Window).
+* ALL styles MUST be extracted to dedicated `.axaml` files in the appropriate `Styles` directory (Feature-specific or Shared).
+* In the View file, you are ONLY allowed to import styles using `<StyleInclude Source="..." />`.
+* DO NOT ignore this rule even for small, one-off styles. 
+
 # ControlTheme
 
 * Control themes should be placed in same folders as styles
