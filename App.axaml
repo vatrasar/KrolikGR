@@ -11,7 +11,7 @@
     </Application.DataTemplates>
   
     <Application.Styles>
-        <StyleInclude Source="avares://KrolikGR/Src/Shared/Styles/AppThemeStyles.axaml" />
+        <StyleInclude Source="avares://KrolikGR/Src/Shared/GlobalStyles/AppThemeStyles.axaml" />
         <materialIcons:MaterialIconStyles />
     </Application.Styles>
 </Application>

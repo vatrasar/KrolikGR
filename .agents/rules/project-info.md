@@ -37,7 +37,7 @@ In this folder, you can find folders in which you will work most often
 
 Here we keep folders related to specific features. Each feature must have a separate folder. Inside this folder, there should be the following folders:
 
-* UI - here should be folders for the screens of the given feature
+* UI - here should be folders for the screens and FeatureStyles
 * Domain - and in that folder you can add folders for services, models ,usecases, enums and ect if needed
 * Resources here you put file with strings
 
@@ -51,7 +51,11 @@ Here we have two files: AppBootstrapper and IFeatureModule. AppBootstrapper is u
 
 ### Shared
 
-It is best to put here UI elements that are shared across multiple features. Also you inside you have folder Resources with GlobalStrings.resx file inside it
+It is best to put here UI elements that are shared across multiple features.You can find there folders like
+
+* Resources with GlobalStrings.resx file inside it. 
+
+* GlobalStyles with styles files used across several features in app
 
 ### Core
 
@@ -110,8 +114,6 @@ public class MalpaModule : IFeatureModule
 
 Each module is automaticaly register using reflection in AppBootstrapper (you don't have to do it).
 
-
-
 ## ViewModels
 
 1. All view models extends ViewModelBase
@@ -127,8 +129,6 @@ Each module is automaticaly register using reflection in AppBootstrapper (you do
    * has property UrlPathSegment which has type String and should contains name of Screen in kebab case (for example for screen WielkaMalpa it would be "wielka-malpa")
 
 Example view model
-
-
 
 ```csharp
 public class EmployeeListViewModel : ViewModelBase, IRoutableViewModel

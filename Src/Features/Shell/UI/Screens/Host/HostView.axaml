@@ -10,10 +10,10 @@
                      >
                      
     <UserControl.Styles>
-        <StyleInclude Source="avares://KrolikGR/Src/Features/Shell/UI/Styles/BordersStyles.axaml" />
-        <StyleInclude Source="avares://KrolikGR/Src/Features/Shell/UI/Styles/ButtonsStyles.axaml" />
-        <StyleInclude Source="avares://KrolikGR/Src/Features/Shell/UI/Styles/TextBlocksStyles.axaml" />
-        <StyleInclude Source="avares://KrolikGR/Src/Features/Shell/UI/Styles/MaterialIconsStyles.axaml" />
+        <StyleInclude Source="avares://KrolikGR/Src/Features/Shell/UI/FeatureStyles/BordersStyles.axaml" />
+        <StyleInclude Source="avares://KrolikGR/Src/Features/Shell/UI/FeatureStyles/ButtonsStyles.axaml" />
+        <StyleInclude Source="avares://KrolikGR/Src/Features/Shell/UI/FeatureStyles/TextBlocksStyles.axaml" />
+        <StyleInclude Source="avares://KrolikGR/Src/Features/Shell/UI/FeatureStyles/MaterialIconsStyles.axaml" />
     </UserControl.Styles>
 
     <DockPanel>
