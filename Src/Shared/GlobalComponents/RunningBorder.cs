@@ -13,13 +13,13 @@ namespace KrolikGR.Src.Shared.GlobalComponents;
 public class RunningBorder : Border
 {
     public static readonly StyledProperty<Color> RunningColorProperty =
-        AvaloniaProperty.Register<RunningBorder, Color>(nameof(RunningColor), Color.Parse("#2ECC71"));
+        AvaloniaProperty.Register<RunningBorder, Color>(nameof(RunningColor), Colors.Transparent);
 
     public static readonly StyledProperty<Color> BaseBorderColorProperty =
-        AvaloniaProperty.Register<RunningBorder, Color>(nameof(BaseBorderColor), Colors.Gray);
+        AvaloniaProperty.Register<RunningBorder, Color>(nameof(BaseBorderColor), Colors.Transparent);
 
     public static readonly StyledProperty<double> AnimationDurationProperty =
-        AvaloniaProperty.Register<RunningBorder, double>(nameof(AnimationDuration), 3.0);
+        AvaloniaProperty.Register<RunningBorder, double>(nameof(AnimationDuration), 12.0);
 
     public Color RunningColor
     {
