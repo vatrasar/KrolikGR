@@ -1,11 +1,7 @@
 <Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:material="using:Material.Icons.Avalonia">
-    <Style Selector="Border.menuBorder.collapsed material|MaterialIcon.menuIcon">
+    <Style Selector="material|MaterialIcon.menuIcon">
         <Setter Property="Margin" Value="0" />
-    </Style>
-    
-    <Style Selector="Border.menuBorder material|MaterialIcon.menuIcon">
-        <Setter Property="Margin" Value="0,0,10,0" />
     </Style>
 </Styles>

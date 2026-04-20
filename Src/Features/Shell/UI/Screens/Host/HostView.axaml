@@ -21,38 +21,49 @@
                 Classes="menuBorder"
                 Classes.collapsed="{Binding IsMenuCollapsed}"
                 BorderBrush="Gray" BorderThickness="0,0,1,0" Padding="10">
-            <StackPanel Spacing="10">
-                <Button Command="{Binding ToggleMenuCommand}" 
-                        Classes="menuButton" 
-                        HorizontalAlignment="Stretch">
-                    <StackPanel Orientation="Horizontal">
-                        <material:MaterialIcon Kind="Menu" Classes="menuIcon" Width="24" Height="24" />
-                        <TextBlock Text="Zwiń / Rozwiń" Classes="menuText" VerticalAlignment="Center" />
-                    </StackPanel>
+            <DockPanel>
+                <Button DockPanel.Dock="Bottom"
+                        Command="{Binding ToggleThemeCommand}"
+                        Classes="menuButton"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Center">
+                    <material:MaterialIcon Kind="{Binding ThemeIcon}" Classes="menuIcon" Width="24" Height="24" />
                 </Button>
                 
-                <Separator Background="LightGray" Margin="0,5" />
-                
-                <Button Classes="menuButton">
-                    <StackPanel Orientation="Horizontal">
-                        <material:MaterialIcon Kind="Home" Classes="menuIcon" Width="24" Height="24" />
-                        <TextBlock Text="Opcja 1 (Test)" Classes="menuText" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-                <Button Classes="menuButton">
-                    <StackPanel Orientation="Horizontal">
-                        <material:MaterialIcon Kind="Account" Classes="menuIcon" Width="24" Height="24" />
-                        <TextBlock Text="Opcja 2 (Test)" Classes="menuText" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-                <Button Classes="menuButton">
-                    <StackPanel Orientation="Horizontal">
-                        <material:MaterialIcon Kind="Settings" Classes="menuIcon" Width="24" Height="24" />
-                        <TextBlock Text="Opcja 3 (Test)" Classes="menuText" VerticalAlignment="Center"/>
-                    </StackPanel>
-                </Button>
-            </StackPanel>
+                <StackPanel Spacing="10">
+                    <Button Command="{Binding ToggleMenuCommand}" 
+                            Classes="menuButton" 
+                            HorizontalAlignment="Stretch">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <material:MaterialIcon Kind="Menu" Classes="menuIcon" Width="24" Height="24" />
+                            <TextBlock Text="Zwiń / Rozwiń" Classes="menuText" VerticalAlignment="Center" />
+                        </StackPanel>
+                    </Button>
+                    
+                    <Separator Background="LightGray" Margin="0,5" />
+                    
+                    <Button Classes="menuButton">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <material:MaterialIcon Kind="Home" Classes="menuIcon" Width="24" Height="24" />
+                            <TextBlock Text="Opcja 1 (Test)" Classes="menuText" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Classes="menuButton">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <material:MaterialIcon Kind="Account" Classes="menuIcon" Width="24" Height="24" />
+                            <TextBlock Text="Opcja 2 (Test)" Classes="menuText" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Classes="menuButton">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                            <material:MaterialIcon Kind="Settings" Classes="menuIcon" Width="24" Height="24" />
+                            <TextBlock Text="Opcja 3 (Test)" Classes="menuText" VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </DockPanel>
         </Border>
+
 
         <rxui:RoutedViewHost Router="{Binding Router}">
             <rxui:RoutedViewHost.PageTransition>
