@@ -1,0 +1,13 @@
+<rxui:ReactiveUserControl x:TypeArguments="local:ScheduleCalendarViewModel"
+                           x:DataType="local:ScheduleCalendarViewModel"
+                           xmlns="https://github.com/avaloniaui"
+                           xmlns:local="using:KrolikGR.Src.Features.Schedule.UI.Screens.ScheduleCalendar"
+                           xmlns:res="using:KrolikGR.Src.Features.Schedule.Resources"
+                           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                           xmlns:rxui="http://reactiveui.net"
+                           x:Class="KrolikGR.Src.Features.Schedule.UI.Screens.ScheduleCalendar.ScheduleCalendarView">
+
+    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock Text="{x:Static res:ScheduleStrings.ScheduleCalendarTitle}" FontSize="24" FontWeight="Bold"/>
+    </StackPanel>
+</rxui:ReactiveUserControl>
