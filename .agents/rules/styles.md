@@ -2,9 +2,13 @@
 trigger: always_on
 ---
 
-#Theme
+# Theme and colors
 
-Project use FluentTheme. 
+The application use the **FluentTheme** design system with custom palettes defined in the project.
+*   **Prohibition of Hardcoded Colors:** DO NOT use hex codes (e.g., `#FFFFFF`) or named colors (e.g., `Red`, `Blue`) directly in XAML or code. Use theme resources instead.
+*   **Dynamic Resources:** Always use `{DynamicResource}` for brushes and colors to ensure compatibility with Light/Dark mode switching.
+*   **Custom Colors:** If a unique color is absolutely necessary (e.g., for specific status indicators), it must be added to Shared/GlobalStyles/Colors.axaml
+
 
 # Icons
 
