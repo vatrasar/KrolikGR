@@ -15,7 +15,7 @@ You have installed Material.Icons.Avalonia and Avalonia.Fluent.Icons so you can 
 * Files with styles related to feature should be placed in UI/FeatureStyles folder of feature. 
 * Styles used across several features should be placed in Shared/GlobalStyles folder.
 * Styles used only in one screen should be placed in style ScreenStyles inside of screen folder
-* You can add new global and feature styles only if i directly tell to do so. For default yous should place all new styles in ScreenStyles of screen which will use this styles
+* You can add new global and feature styles only if i directly tell to do so. For default you should place all new styles in ScreenStyles of screen which will use this styles
 * There should be separated files for styles for different types of controls (for example styles for Buttons and TextBlocks should be in separated files). Colors also should be placed in separated style file.
 * to use file with styles in your view you need to import it for example
   <StyleInclude Source="avares://KrolikGR/Src/Shared/GlobalStyles/ButtonsStyles.axaml" />
