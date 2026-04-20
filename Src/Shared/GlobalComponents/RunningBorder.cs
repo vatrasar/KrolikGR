@@ -6,6 +6,10 @@ using Avalonia.Threading;
 
 namespace KrolikGR.Src.Shared.GlobalComponents;
 
+/// <summary>
+/// A reusable component that represents a border with a "running" light effect.
+/// It animates a ConicGradientBrush to create a highlight that moves around the border edges.
+/// </summary>
 public class RunningBorder : Border
 {
     public static readonly StyledProperty<Color> RunningColorProperty =
