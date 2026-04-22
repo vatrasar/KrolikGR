@@ -10,33 +10,7 @@ Using `DispatcherTimer` for creating high-frequency UI animations (e.g., rotatin
 - **Animations:** Use Avalonia's built-in `Animation` class with `KeyFrames` or `Transitions` for property-based animations.
 - **Continuous Updates:** If you must perform custom rendering updates from code-behind, use `CompositionTarget.Rendering` or `TopLevel.RequestAnimationFrame` to ensure the logic ticks in sync with the display's VSync.
 
-Correct Pattern (Animation API):
 
-```csharp
-// Use Avalonia's Animation system instead of DispatcherTimer
-private void StartModernAnimation()
-{
-    var animation = new Animation
-    {
-        Duration = TimeSpan.FromSeconds(2),
-        IterationCount = IterationCount.Infinite,
-        Children =
-        {
-            new KeyFrame
-            {
-                Cue = new Cue(0d),
-                Setters = { new Setter(RotateTransform.AngleProperty, 0.0) }
-            },
-            new KeyFrame
-            {
-                Cue = new Cue(1d),
-                Setters = { new Setter(RotateTransform.AngleProperty, 360.0) }
-            }
-        }
-    };
-    _animationInstance = animation.RunAsync(animatedElement);
-}
-```
 
 # UI Component Cleanup
  In Avalonia controls, ensure all background tasks are cancelled in `OnDetachedFromVisualTree`. If a task is tied to visibility, manage it in `OnPropertyChanged` when `IsVisible` changes.

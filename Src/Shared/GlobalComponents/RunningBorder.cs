@@ -1,8 +1,11 @@
 using System;
+using System.Threading;
 using Avalonia;
+using Avalonia.Animation;
+using Avalonia.Animation.Easings;
 using Avalonia.Controls;
 using Avalonia.Media;
-using Avalonia.Threading;
+using Avalonia.Styling;
 
 namespace KrolikGR.Src.Shared.GlobalComponents;
 
@@ -41,14 +44,15 @@ public class RunningBorder : Border
 
 
     private ConicGradientBrush? _gradientBrush;
-    private DispatcherTimer? _animationTimer;
-    private double _currentAngle;
+    private Animation? _animation;
+    private CancellationTokenSource? _cts;
     private bool _isAttachedToVisualTree;
 
     static RunningBorder()
     {
         RunningColorProperty.Changed.AddClassHandler<RunningBorder>((border, _) => border.RebuildGradientStops());
         BaseBorderColorProperty.Changed.AddClassHandler<RunningBorder>((border, _) => border.RebuildGradientStops());
+        AnimationDurationProperty.Changed.AddClassHandler<RunningBorder>((border, _) => border.RebuildAnimation());
     }
 
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
@@ -58,7 +62,8 @@ public class RunningBorder : Border
 
         _gradientBrush = BuildGradientBrush();
         BorderBrush = _gradientBrush;
-
+        
+        RebuildAnimation();
         UpdateAnimationState();
     }
 
@@ -78,6 +83,34 @@ public class RunningBorder : Border
         }
     }
 
+    private void RebuildAnimation()
+    {
+        _animation = new Animation
+        {
+            Duration = TimeSpan.FromSeconds(AnimationDuration),
+            IterationCount = IterationCount.Infinite,
+            Easing = new LinearEasing(),
+            Children =
+            {
+                new KeyFrame
+                {
+                    Cue = new Cue(0d),
+                    Setters = { new Setter(ConicGradientBrush.AngleProperty, 0.0) }
+                },
+                new KeyFrame
+                {
+                    Cue = new Cue(1d),
+                    Setters = { new Setter(ConicGradientBrush.AngleProperty, 360.0) }
+                }
+            }
+        };
+
+        if (_cts != null)
+        {
+            StartAnimation();
+        }
+    }
+
     private void UpdateAnimationState()
     {
         if (IsVisible && _isAttachedToVisualTree)
@@ -88,32 +121,20 @@ public class RunningBorder : Border
 
     private void StartAnimation()
     {
-        if (_animationTimer != null) return;
-
-        _animationTimer = new DispatcherTimer
+        StopAnimation();
+        
+        if (_gradientBrush != null && _animation != null)
         {
-            Interval = TimeSpan.FromMilliseconds(16)
-        };
-        _animationTimer.Tick += OnAnimationTick;
-        _animationTimer.Start();
+            _cts = new CancellationTokenSource();
+            _ = _animation.RunAsync(_gradientBrush, _cts.Token);
+        }
     }
 
     private void StopAnimation()
     {
-        if (_animationTimer == null) return;
-
-        _animationTimer.Stop();
-        _animationTimer.Tick -= OnAnimationTick;
-        _animationTimer = null;
-    }
-
-    private void OnAnimationTick(object? sender, EventArgs e)
-    {
-        var degreesPerTick = 360.0 / (AnimationDuration * 60.0);
-        _currentAngle = (_currentAngle + degreesPerTick) % 360;
-
-        if (_gradientBrush != null)
-            _gradientBrush.Angle = _currentAngle;
+        _cts?.Cancel();
+        _cts?.Dispose();
+        _cts = null;
     }
 
     private void RebuildGradientStops()
@@ -127,7 +148,7 @@ public class RunningBorder : Border
         return new ConicGradientBrush
         {
             Center = new RelativePoint(0.5, 0.5, RelativeUnit.Relative),
-            Angle = _currentAngle,
+            Angle = 0.0,
             GradientStops = BuildGradientStops()
         };
     }
