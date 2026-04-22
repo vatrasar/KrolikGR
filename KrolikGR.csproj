@@ -31,5 +31,18 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Tmds.DBus.Protocol" Version="0.21.3" />
+    <PackageReference Include="VocaDb.ResXFileCodeGenerator" Version="3.1.0" PrivateAssets="all" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <ResXGenerator_PublicClass>true</ResXGenerator_PublicClass>
+    <ResXGenerator_StaticClass>true</ResXGenerator_StaticClass>
+    <ResXGenerator_NullForgivingOperators>true</ResXGenerator_NullForgivingOperators>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="**\*.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
   </ItemGroup>
 </Project>
