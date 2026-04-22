@@ -18,16 +18,20 @@ An application named KrolikGR. The application is meant to help with scheduling 
 
 It is meant to use routing from ReactiveUI and a feature-oriented folder architecture.
 
+## Language
+
+Codebase: All technical content (class names, variables, methods, comments, commits, documentation) MUST be in English.
+
+User Interface: App will be used in polish McDonald so the UI presented to the user must be in Polish.
+
 # Glossary of terms
 
 ## Screen
 
-When in instruction for you I use the word "screen", I mean 4 files:
-NameViewModel.cs, NameView.axaml.cs, NameView.axaml and Screen.md.
-So, for example, when I say "screen malpa", I mean the files MalpaViewModel.cs, MalpaView.axaml.cs, MalpaView.axaml and Screen.md.
+When in instruction for you I use the word "screen", I mean 3 files:
+NameViewModel.cs, NameView.axaml.cs, NameView.axaml.
+So, for example, when I say "screen malpa", I mean the files MalpaViewModel.cs, MalpaView.axaml.cs, and MalpaView.axaml.
 The files are usually grouped in a single folder and are responsible for the UI of one screen.
-
-
 
 ## Components
 Components are similar to screens (so they also NameViewModel.cs, NameView.axaml.cs, NameView.axaml and ect) but they they represents small elements of UI (for example custom buttons, not big screens like landpage)
@@ -246,13 +250,4 @@ i mean for example if we have feature Animals and we want to have enum Tygrys we
 
 
 # components
-Custom components should by default be placed in ScreenComponents. You can place them in FeatureComponents or GlobalComponents only when i will directly tell you to do that. 
-
-# Screen.md
-Every screen folder MUST contain a Screen.md file. This file should contain documentation about the screen, including:
-- Purpose of the screen (what it does).
-- List of functionalities and features available on this screen.
-- Information about key UI elements (e.g., buttons that trigger specific actions like theme switching).
-- Any other relevant information for developers or AI agents to understand the screen's role.
-
-**IMPORTANT:** Whenever you modify a screen (logic, UI, or functionalities), you MUST update the corresponding `Screen.md` file to reflect these changes. Documentation must always stay in sync with the implementation.
+Custom components should by default be placed in ScreenComponents. You can place them in FeatureComponents or GlobalComponents only when i will directly tell you to do that.
