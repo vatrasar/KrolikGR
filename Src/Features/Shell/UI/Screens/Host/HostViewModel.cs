@@ -5,6 +5,8 @@ using Avalonia.Styling;
 using Material.Icons;
 using System.Reactive.Linq;
 using KrolikGR.Src.Core.Mvvm;
+using KrolikGR.Src.Features.Schedule.UI.Screens.ScheduleCalendar;
+
 
 
 namespace KrolikGR.Src.Features.Shell.UI.Screens.Host;
@@ -21,6 +23,7 @@ public partial class HostViewModel : ViewModelBase, IScreen
     public HostViewModel(RoutingState router)
     {
         Router = router;
+        Router.NavigationStack.Add(new ScheduleCalendarViewModel(this));
     }
 
 

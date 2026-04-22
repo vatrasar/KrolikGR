@@ -1,5 +1,5 @@
 ---
-trigger: manual
+trigger: model_decision
 description: use it when user ask you to create skill for ai agent
 ---
 

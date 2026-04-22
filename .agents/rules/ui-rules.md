@@ -1,3 +1,7 @@
+---
+trigger: always_on
+---
+
 # UI Element Naming Convention (x:Name)
 * Goal: To streamline code navigation and provide precise element referencing for AI-assisted development and prompt engineering.
 
@@ -8,3 +12,7 @@
 * No Generic Names: Do not use names like Button1, MyTextBlock, or Input_Field.
 
 Attribute Placement: The x:Name attribute should be placed as the first or second attribute within the XAML tag, immediately following the element type, to ensure high visibility.
+
+
+# UI style
+UI should look modern, add transition and hover animation etc. UI should give "wow" effect.

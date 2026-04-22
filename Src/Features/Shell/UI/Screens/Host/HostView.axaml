@@ -72,13 +72,6 @@
             <rxui:RoutedViewHost.PageTransition>
                 <CrossFade Duration="0:0:0.250" />
             </rxui:RoutedViewHost.PageTransition>
-            
-            <rxui:RoutedViewHost.DefaultContent>
-                <TextBlock Text="Ładowanie..." 
-                            HorizontalAlignment="Center" 
-                            VerticalAlignment="Center" 
-                />
-            </rxui:RoutedViewHost.DefaultContent>
         </rxui:RoutedViewHost>
     </DockPanel>
 </rxui:ReactiveUserControl>
