@@ -10,6 +10,7 @@ Use this skill whenever you need to create a new Screen in the application. A "S
 - `NameViewModel.cs` (inheriting from `ViewModelBase` and implementing `IRoutableViewModel`).
 - `NameView.axaml` (ReactiveUI-based UserControl).
 - `NameView.axaml.cs` (code-behind).
+- `Screen.md` (documentation).
 - A `ScreenStyles/` directory.
 
 ## How to use it
@@ -30,7 +31,7 @@ bash .agents/skills/create-screen/scripts/create_screen.sh <feature_ui_path> <sc
 ### 3. What happens
 The script will:
 - Create the folder `.agents/skills/create-screen/scripts/../../<feature_ui_path>/Screens/<screen_name>`.
-- Generate the three required files with pre-filled boilerplate logic (namespaces, class names, routing segment).
+- Generate the four required files with pre-filled boilerplate logic (namespaces, class names, routing segment, and documentation template).
 - Create a `ScreenStyles` directory inside the screen folder.
 
 ## Patterns and Guidelines

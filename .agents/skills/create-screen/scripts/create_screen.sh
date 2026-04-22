@@ -104,6 +104,21 @@ cat <<EOF > "$XAML_FILE"
 </rxui:ReactiveUserControl>
 EOF
 
+MD_FILE="$DEST_DIR/Screen.md"
+
+cat <<EOF > "$MD_FILE"
+# ${SCREEN_NAME} Screen
+
+## Purpose
+[Describe the purpose of this screen here]
+
+## Functionalities
+- [List functionalities here]
+
+## Key UI Elements
+- [List key UI elements here]
+EOF
+
 echo "Successfully created Screen: $SCREEN_NAME"
 echo "Location: $DEST_DIR"
 echo "Namespace: $NAMESPACE"
