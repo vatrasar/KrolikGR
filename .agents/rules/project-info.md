@@ -33,8 +33,19 @@ NameViewModel.cs, NameView.axaml.cs, NameView.axaml.
 So, for example, when I say "screen malpa", I mean the files MalpaViewModel.cs, MalpaView.axaml.cs, and MalpaView.axaml.
 The files are usually grouped in a single folder and are responsible for the UI of one screen.
 
+Inside screen folder there may be folder ScreenComponents where you can put folders of components used only by this 
+
+
 ## Components
-Components are similar to screens (so they also NameViewModel.cs, NameView.axaml.cs, NameView.axaml and ect) but they they represents small elements of UI (for example custom buttons, not big screens like landpage)
+
+Components are reusable or isolated UI blocks that are NOT used directly in ReactiveUI routing (they do NOT implement `IRoutableViewModel`). 
+
+There are two types of components you must distinguish:
+
+1. **Smart Components:** They have their own complex logic, state, or actions. They require a full MVVM triad (e.g., `NameViewModel.cs` inheriting from `ViewModelBase`, `NameView.axaml`, and `NameView.axaml.cs`).
+2. **Dumb Components (Stateless):** They only display data and have no complex logic. They do NOT have their own ViewModel file. They consist only of `NameView.axaml` and `NameView.axaml.cs`, using `x:DataType` bound directly to a Model or a property of the parent's ViewModel.
+
+ 
 
 # Folders architecture
 
@@ -65,6 +76,7 @@ It is best to put here UI elements that are shared across multiple features.You 
 * Resources with GlobalStrings.resx file inside it. 
 
 * GlobalStyles with styles files used across several features in app
+
 * GlobalComponents for custom components (for example custom buttons)
 
 ### Core
@@ -248,6 +260,22 @@ resx file example
 files with enums should be stored in "Enums" folder in Core or FeatureName/Domain. 
 i mean for example if we have feature Animals and we want to have enum Tygrys we should place it in Features/Animals/Domain/Enums/Tygrys.cs
 
+# Components
 
-# components
 Custom components should by default be placed in ScreenComponents. You can place them in FeatureComponents or GlobalComponents only when i will directly tell you to do that.
+
+## Communication with parent
+
+When a Screen (Parent) contains a Smart Component (Child), the communication MUST strictly follow ReactiveUI patterns to avoid tight coupling. 
+
+
+1. **NO Direct Reference:** A Child ViewModel MUST NOT know about its Parent. Never inject the Parent ViewModel into the Child ViewModel.
+2. **NO MessageBus:** Do NOT use ReactiveUI `MessageBus` for Parent-Child communication. It is reserved ONLY for decoupled global events.
+
+**Allowed Communication Methods:**
+
+1. **Observing State (WhenAnyValue):** If the Child manages state (e.g., `SelectedEmployee`), expose it as a `[Reactive]` property. 
+2. **Observing Actions (ReactiveCommand):** If the Child performs an action (e.g., clicking a 'Delete' button), the Child MUST expose a `ReactiveCommand`.
+
+# Screens and models 
+File with  model can only be at the feature or core level. You can't put models in the screens folder
