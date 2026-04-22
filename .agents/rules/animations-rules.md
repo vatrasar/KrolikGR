@@ -1,53 +1,9 @@
 ---
-trigger: always_on
+trigger: model_decision
+description: Use it when you create or edit animations
 ---
 
-# reactive UI
-
-## ReactiveUI Source Generators (Fody/Generation)
-
-Direct implementation of `INotifyPropertyChanged`, manual `RaiseAndSetIfChanged`, or manual `ReactiveCommand` instantiation is strictly forbidden.
-
-- **Property Declaration:** Use the `[Reactive]` attribute on private fields.
-
-- **ReadOnly Properties (OAPH):** Use the `[ObservableAsProperty]` attribute.
-
-- **Commands:** Use the `[ReactiveCommand]` attribute on private methods. This automatically generates a `ReactiveCommand` property with the appropriate name
-
-Correct Pattern:
-
-```csharp
-//...
-using ReactiveUI.SourceGenerators;
-
-//...
-
-public partial class ExampleViewModel : ViewModelBase
-{
-    [Reactive]
-    private string _firstName = string.Empty;
-
-    [ObservableAsProperty]
-    private string _fullName = string.Empty;
-
-    // ✅ The generator creates "public IReactiveCommand SaveCommand"
-    [ReactiveCommand]
-    private async Task Save()
-    {
-        // Business logic for McDonald's Roster
-        await Task.Delay(100); 
-    }
-
-    public ExampleViewModel()
-    {
-        this.WhenAnyValue(x => x.FirstName)
-            .Select(name => $"User: {name}")
-            .ToPropertyEx(this, x => x.FullName);
-    }
-}
-```
-
-## UI Animations and Timers
+# UI Animations and Timers
 
 Using `DispatcherTimer` for creating high-frequency UI animations (e.g., rotating brushes, moving elements at 60 FPS) is strictly forbidden. This approach is legacy, inefficient, and not synchronized with the screen refresh rate (VSync).
 
@@ -81,3 +37,11 @@ private void StartModernAnimation()
     _animationInstance = animation.RunAsync(animatedElement);
 }
 ```
+
+# UI Component Cleanup
+ In Avalonia controls, ensure all background tasks are cancelled in `OnDetachedFromVisualTree`. If a task is tied to visibility, manage it in `OnPropertyChanged` when `IsVisible` changes.
+
+
+
+# VisualBrush and animations
+When working with Avalonia UI animations and brushes, remember that XAML `<Animation>` definitions DO NOT tick or update continuously if they are placed on elements inside a `VisualBrush` (or `DrawingBrush`). Elements inside a `Visual` property of a `VisualBrush` are not fully connected to the main window's visual tree's render clock. If you need an animated brush (like a rotating gradient or moving element), do NOT put the XAML `<Animation>` inside a `VisualBrush.Visual`. 
