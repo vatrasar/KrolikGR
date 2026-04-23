@@ -1,0 +1,64 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:models="using:KrolikGR.Src.Core.Models.Calendar"
+             x:Class="KrolikGR.Src.Features.Schedule.UI.Screens.ScheduleCalendar.ScreenComponents.DaySummaryPanel.DaySummaryPanelView"
+             x:DataType="models:CalendarDay"
+             Background="Transparent">
+
+    <Border Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
+            BorderBrush="{DynamicResource SystemControlBackgroundBaseLowBrush}"
+            BorderThickness="1"
+            CornerRadius="8"
+            Padding="16">
+        
+        <StackPanel Spacing="16">
+            
+            <TextBlock Text="{Binding Date, StringFormat={}{0:dd MMMM yyyy}}" 
+                       FontSize="20" 
+                       FontWeight="Bold" />
+            
+            <TextBlock Text="Zapełnienie etatów:" 
+                       FontWeight="SemiBold" 
+                       Margin="0,8,0,0"/>
+            
+            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*, Auto" Margin="0,8,0,16">
+                <!-- Crew -->
+                <StackPanel Grid.Row="0" Grid.Column="0" Spacing="4" Margin="0,0,16,12">
+                    <TextBlock Text="Załoga" FontSize="14" Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}" />
+                    <ProgressBar Minimum="0" Maximum="100" Value="{Binding CrewPercentage}" Height="8" ShowProgressText="False" />
+                </StackPanel>
+                <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding CrewPercentage, StringFormat={}{0}%}" VerticalAlignment="Bottom" Margin="0,0,0,12" />
+                
+                <!-- Managers -->
+                <StackPanel Grid.Row="1" Grid.Column="0" Spacing="4" Margin="0,0,16,12">
+                    <TextBlock Text="Managerowie" FontSize="14" Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}" />
+                    <ProgressBar Minimum="0" Maximum="100" Value="{Binding ManagersPercentage}" Height="8" ShowProgressText="False" Foreground="{DynamicResource SystemAccentColor}" />
+                </StackPanel>
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding ManagersPercentage, StringFormat={}{0}%}" VerticalAlignment="Bottom" Margin="0,0,0,12" />
+                
+                <!-- Maintenance -->
+                <StackPanel Grid.Row="2" Grid.Column="0" Spacing="4" Margin="0,0,16,0">
+                    <TextBlock Text="Sprzątacze" FontSize="14" Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}" />
+                    <ProgressBar Minimum="0" Maximum="100" Value="{Binding MaintenancePercentage}" Height="8" ShowProgressText="False" Foreground="{DynamicResource SystemAccentColor}" />
+                </StackPanel>
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding MaintenancePercentage, StringFormat={}{0}%}" VerticalAlignment="Bottom" />
+            </Grid>
+            
+            <Border Height="1" Background="{DynamicResource SystemControlBackgroundBaseLowBrush}" Margin="0,8"/>
+            
+            <!-- Actions -->
+            <StackPanel Spacing="8">
+                <!-- Using Primary Button Style if available, fallback to default -->
+                <Button Content="Dodaj załogę" 
+                        HorizontalAlignment="Stretch" 
+                        HorizontalContentAlignment="Center"
+                        Classes="Primary" />
+                
+                <Button Content="Pokaż szczegóły dnia" 
+                        HorizontalAlignment="Stretch" 
+                        HorizontalContentAlignment="Center" />
+            </StackPanel>
+            
+        </StackPanel>
+    </Border>
+</UserControl>

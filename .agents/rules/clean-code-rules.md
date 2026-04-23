@@ -21,3 +21,7 @@ trigger: always_on
 8. There must be two blank lines separating the last property (or backing field) from the constructor or the first method. This creates a clear visual boundary between the class state and its behavior.
 
 9. Avoid Legacy Patterns. Never suggest deprecated patterns or "old-school" boilerplate if a modern, cleaner alternative exists (e.g., use `ReactiveUI.Fody` instead of manual `RaiseAndSetIfChanged`).
+
+10. Use suffix DTO only for models which are used for network communication
+
+11. Models shouldn't use suffix "model". Better to name model Malpa than MalpaModel

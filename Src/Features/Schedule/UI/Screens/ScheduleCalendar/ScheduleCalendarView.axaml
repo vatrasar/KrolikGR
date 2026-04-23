@@ -3,11 +3,45 @@
                            xmlns="https://github.com/avaloniaui"
                            xmlns:local="using:KrolikGR.Src.Features.Schedule.UI.Screens.ScheduleCalendar"
                            xmlns:res="using:KrolikGR.Src.Features.Schedule.Resources"
+                           xmlns:global="using:KrolikGR.Src.Shared.GlobalComponents.CalendarGrid"
+                           xmlns:components="using:KrolikGR.Src.Features.Schedule.UI.Screens.ScheduleCalendar.ScreenComponents.DaySummaryPanel"
                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                            xmlns:rxui="http://reactiveui.net"
                            x:Class="KrolikGR.Src.Features.Schedule.UI.Screens.ScheduleCalendar.ScheduleCalendarView">
 
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-        <TextBlock Text="{x:Static res:ScheduleStrings.ScheduleCalendarTitle}" FontSize="24" FontWeight="Bold"/>
-    </StackPanel>
+    <Grid ColumnDefinitions="*, Auto" Margin="24">
+        
+        <!-- Calendar Component -->
+        <global:CalendarGridView Grid.Column="0" 
+                                 DataContext="{Binding CalendarGrid}" 
+                                 Margin="0,0,16,0" />
+        
+        <!-- Day Summary Panel Container -->
+        <Border Grid.Column="1" 
+                Width="320"
+                Classes.hidden="{Binding SelectedDay, Converter={x:Static ObjectConverters.IsNull}}">
+            <Border.Styles>
+                <Style Selector="Border.hidden">
+                    <Setter Property="Width" Value="0" />
+                    <Setter Property="Opacity" Value="0" />
+                    <Setter Property="Margin" Value="0" />
+                </Style>
+                <Style Selector="Border:not(.hidden)">
+                    <Setter Property="Width" Value="320" />
+                    <Setter Property="Opacity" Value="1" />
+                    <Setter Property="Margin" Value="16,0,0,0" />
+                </Style>
+            </Border.Styles>
+            <Border.Transitions>
+                <Transitions>
+                    <DoubleTransition Property="Width" Duration="0:0:0.3" Easing="CubicEaseOut"/>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.3" Easing="CubicEaseOut"/>
+                    <ThicknessTransition Property="Margin" Duration="0:0:0.3" Easing="CubicEaseOut"/>
+                </Transitions>
+            </Border.Transitions>
+            
+            <components:DaySummaryPanelView DataContext="{Binding SelectedDay}" />
+        </Border>
+        
+    </Grid>
 </rxui:ReactiveUserControl>
