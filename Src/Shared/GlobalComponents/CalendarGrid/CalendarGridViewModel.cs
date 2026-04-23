@@ -32,7 +32,7 @@ public partial class CalendarGridViewModel : ViewModelBase
     {
         _currentMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
 
-        this.WhenAnyValue(x => x.CurrentMonth)
+        _monthNameYearHelper = this.WhenAnyValue(x => x.CurrentMonth)
             .Select(date => date.ToString("MMMM yyyy"))
             .ToProperty(this, x => x.MonthNameYear);
 
