@@ -40,3 +40,18 @@ You have installed Material.Icons.Avalonia and Avalonia.Fluent.Icons so you can 
 
 * Control themes should be placed in same folders as styles
 * files with ControlThemes should have suffix "ControlTheme" for example MalpaControlTheme.axaml
+
+
+# 🧩 Layout & Dimensioning Philosophy (Logic Over Values)
+
+1. **Layout-First Approach:**
+   - Prioritize **Fluid Layouts** over fixed dimensions. If a layout goal can be achieved using `Grid` (star/auto sizing), `StackPanel` (with `Spacing`), or `DockPanel`, you MUST choose that over hardcoded `Width`/`Height`.
+   - Use `HorizontalAlignment="Stretch"` and `VerticalAlignment="Stretch"` as the default behavior for containers.
+
+2. **Smart Hardcoding (The "Pragmatic Developer" Rule):**
+   - **Spacing & Gaps:** Hardcoded values for `Margin`, `Padding`, and `Spacing` are perfectly fine for fine-tuning the UI. 
+   - **Constraint Over Definition:** Use `MaxWidth` or `MinWidth` to control the visual flow on large screens, rather than a hardcoded `Width`. It’s better to say "this sidebar shouldn't exceed 300px" than to say "this sidebar IS 300px".
+
+3. **Anti-Pattern Warning (Margin Abuse):**
+   - NEVER use large margins or paddings to "push" or "center" elements (e.g., `Margin="0,0,500,0"`), you should use layouts instead of that
+4. Use `Grid` for complex, multi-dimensional layouts where `StackPanel` would require excessive nesting.
