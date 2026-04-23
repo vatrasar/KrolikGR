@@ -20,6 +20,7 @@ The Schedule Calendar screen is the primary interface for viewing and managing t
 - **Transitions**: Uses Avalonia `Transitions` for the summary panel:
     - `DoubleTransition` for `Width` and `Opacity`.
     - `ThicknessTransition` for `Margin`.
+- **Styles**: Screen-specific styles and transitions are located in `ScreenStyles/ScheduleCalendarStyles.axaml`.
 - **Components**: 
     - Uses `CalendarGridView` (Global Component).
     - Uses `DaySummaryPanelView` (Dumb Screen Component).

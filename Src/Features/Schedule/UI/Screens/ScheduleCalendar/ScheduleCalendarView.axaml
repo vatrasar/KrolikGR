@@ -9,6 +9,10 @@
                            xmlns:rxui="http://reactiveui.net"
                            x:Class="KrolikGR.Src.Features.Schedule.UI.Screens.ScheduleCalendar.ScheduleCalendarView">
 
+    <UserControl.Styles>
+        <StyleInclude Source="avares://KrolikGR/Src/Features/Schedule/UI/Screens/ScheduleCalendar/ScreenStyles/ScheduleCalendarStyles.axaml" />
+    </UserControl.Styles>
+
     <Grid ColumnDefinitions="*, Auto" Margin="24">
         
         <!-- Calendar Component -->
@@ -18,27 +22,8 @@
         
         <!-- Day Summary Panel Container -->
         <Border Grid.Column="1" 
+                Classes="SummaryPanelContainer"
                 Classes.hidden="{Binding SelectedDay, Converter={x:Static ObjectConverters.IsNull}}">
-            <Border.Styles>
-                <Style Selector="Border.hidden">
-                    <Setter Property="Width" Value="0" />
-                    <Setter Property="Opacity" Value="0" />
-                    <Setter Property="Margin" Value="0" />
-                </Style>
-                <Style Selector="Border:not(.hidden)">
-                    <Setter Property="Width" Value="320" />
-                    <Setter Property="Opacity" Value="1" />
-                    <Setter Property="Margin" Value="16,0,0,0" />
-                </Style>
-            </Border.Styles>
-            <Border.Transitions>
-                <Transitions>
-                    <DoubleTransition Property="Width" Duration="0:0:0.3" Easing="CubicEaseOut"/>
-                    <DoubleTransition Property="Opacity" Duration="0:0:0.3" Easing="CubicEaseOut"/>
-                    <ThicknessTransition Property="Margin" Duration="0:0:0.3" Easing="CubicEaseOut"/>
-                </Transitions>
-            </Border.Transitions>
-            
             <components:DaySummaryPanelView DataContext="{Binding SelectedDay}" />
         </Border>
         
