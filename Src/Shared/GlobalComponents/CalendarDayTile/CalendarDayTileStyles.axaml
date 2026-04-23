@@ -1,0 +1,83 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+    <Style Selector="Border.not-current-month">
+        <Setter Property="Opacity" Value="0.4" />
+    </Style>
+
+    <Styles.Resources>
+        <ControlTheme x:Key="WaterFillProgressBarTheme" TargetType="ProgressBar">
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Template">
+                <ControlTemplate>
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="{TemplateBinding CornerRadius}"
+                            ClipToBounds="True">
+                        <Panel x:Name="PART_Root">
+                            <Border x:Name="PART_Indicator"
+                                    Background="{TemplateBinding Foreground}"
+                                    VerticalAlignment="Bottom"
+                                    HorizontalAlignment="Stretch">
+                                <Panel>
+                                    <!-- Wave 1 -->
+                                    <Path Data="M 0,10 C 25,0 75,20 100,10 C 125,0 175,20 200,10 C 225,0 275,20 300,10 V 30 H 0 Z"
+                                          Fill="{TemplateBinding Foreground}"
+                                          Opacity="0.6"
+                                          VerticalAlignment="Top"
+                                          Margin="0,-12,0,0">
+                                        <Path.RenderTransform>
+                                            <TranslateTransform />
+                                        </Path.RenderTransform>
+                                        <Path.Styles>
+                                            <Style Selector="Path">
+                                                <Style.Animations>
+                                                    <Animation Duration="0:0:3" IterationCount="Infinite">
+                                                        <KeyFrame Cue="0%">
+                                                            <Setter Property="TranslateTransform.X" Value="0" />
+                                                        </KeyFrame>
+                                                        <KeyFrame Cue="100%">
+                                                            <Setter Property="TranslateTransform.X" Value="-100" />
+                                                        </KeyFrame>
+                                                    </Animation>
+                                                </Style.Animations>
+                                            </Style>
+                                        </Path.Styles>
+                                    </Path>
+
+                                    <!-- Wave 2 -->
+                                    <Path Data="M 0,10 C 30,20 70,0 100,10 C 130,20 170,0 200,10 C 230,20 270,0 300,10 V 30 H 0 Z"
+                                          Fill="{TemplateBinding Foreground}"
+                                          Opacity="0.4"
+                                          VerticalAlignment="Top"
+                                          Margin="0,-10,0,0">
+                                        <Path.RenderTransform>
+                                            <TranslateTransform />
+                                        </Path.RenderTransform>
+                                        <Path.Styles>
+                                            <Style Selector="Path">
+                                                <Style.Animations>
+                                                    <Animation Duration="0:0:5" IterationCount="Infinite">
+                                                        <KeyFrame Cue="0%">
+                                                            <Setter Property="TranslateTransform.X" Value="-50" />
+                                                        </KeyFrame>
+                                                        <KeyFrame Cue="100%">
+                                                            <Setter Property="TranslateTransform.X" Value="-150" />
+                                                        </KeyFrame>
+                                                    </Animation>
+                                                </Style.Animations>
+                                            </Style>
+                                        </Path.Styles>
+                                    </Path>
+                                </Panel>
+                            </Border>
+                        </Panel>
+                    </Border>
+                </ControlTemplate>
+            </Setter>
+        </ControlTheme>
+    </Styles.Resources>
+</Styles>

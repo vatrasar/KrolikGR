@@ -5,41 +5,53 @@
              x:DataType="models:CalendarDay"
              x:Name="DayTileControl"
              Background="Transparent">
+<UserControl.Styles>
+        <StyleInclude Source="avares://KrolikGR/Src/Shared/GlobalComponents/CalendarDayTile/CalendarDayTileStyles.axaml" />
+    </UserControl.Styles>
     
     <Border BorderBrush="{DynamicResource SystemControlBackgroundBaseLowBrush}" 
             BorderThickness="1" 
             CornerRadius="8" 
             Margin="4" 
-            Padding="8"
+            ClipToBounds="True"
             Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
             Classes.not-current-month="{Binding !IsCurrentMonth}">
-        <Border.Styles>
-            <Style Selector="Border.not-current-month">
-                <Setter Property="Opacity" Value="0.4" />
-            </Style>
-        </Border.Styles>
         <Border.Transitions>
             <Transitions>
                 <DoubleTransition Property="Opacity" Duration="0:0:0.2" />
             </Transitions>
         </Border.Transitions>
         
-        <Grid RowDefinitions="Auto, *, Auto">
-            <TextBlock x:Name="DateText" 
-                       Grid.Row="0" 
-                       Text="{Binding Date.Day}" 
-                       FontWeight="SemiBold" 
-                       FontSize="16" />
-            
-            <!-- Percentage line -->
+        <Grid>
+            <!-- Liquid Fill Background using standard ProgressBar -->
             <ProgressBar x:Name="FillProgressBar"
-                         Grid.Row="2" 
-                         Height="6" 
-                         Margin="0,8,0,0" 
+                         Theme="{StaticResource WaterFillProgressBarTheme}"
+                         Orientation="Vertical" 
                          Minimum="0" 
                          Maximum="100" 
                          Value="{Binding FillPercentage}" 
-                         ShowProgressText="False" />
+                         Background="Transparent"
+                         BorderThickness="0"
+                         HorizontalAlignment="Stretch"
+                         VerticalAlignment="Stretch"
+                         ShowProgressText="False"
+                         CornerRadius="8">
+                <ProgressBar.Foreground>
+                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                        <GradientStop Offset="0" Color="#44AAFF" />
+                        <GradientStop Offset="1" Color="#0073CF" />
+                    </LinearGradientBrush>
+                </ProgressBar.Foreground>
+            </ProgressBar>
+
+            <!-- Content -->
+            <Grid RowDefinitions="Auto, *, Auto" Margin="8">
+                <TextBlock x:Name="DateText" 
+                           Grid.Row="0" 
+                           Text="{Binding Date.Day}" 
+                           FontWeight="SemiBold" 
+                           FontSize="16" />
+            </Grid>
         </Grid>
     </Border>
 </UserControl>
