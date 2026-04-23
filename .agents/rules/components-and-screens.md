@@ -9,7 +9,7 @@ NameViewModel.cs, NameView.axaml.cs, NameView.axaml and Screen.md.
 So, for example, when I say "screen malpa", I mean the files MalpaViewModel.cs, MalpaView.axaml.cs, MalpaView.axaml and Screen.md.
 The files are usually grouped in a single folder and are responsible for the UI of one screen. 
 
-Before starting any work on a screen, you SHOULD read its `Screen.md` file to understand its purpose, functionalities, and context.
+Before starting any work on a screen, you MUST read its `Screen.md` file to understand its purpose, functionalities, and context.
 
 Inside screen folder there may be folder ScreenComponents where you can put folders of components used only by this screen
 
@@ -38,7 +38,7 @@ Components are reusable or isolated UI blocks that are NOT used directly in Reac
 
 Every component folder MUST contain a Component.md file, which serves as the documentation for that specific component.
 
-Before starting any work on a component, you SHOULD read its `Component.md` file to understand its purpose, usage, and context.
+Before starting any work on a component, you MUST read its `Component.md` file to understand its purpose, usage, and context.
 
 There are two types of components you must distinguish:
 

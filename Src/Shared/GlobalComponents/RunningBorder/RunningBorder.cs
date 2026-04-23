@@ -7,7 +7,7 @@ using Avalonia.Controls;
 using Avalonia.Media;
 using Avalonia.Styling;
 
-namespace KrolikGR.Src.Shared.GlobalComponents;
+namespace KrolikGR.Src.Shared.GlobalComponents.RunningBorder;
 
 /// <summary>
 /// A reusable component that represents a border with a "running" light effect.

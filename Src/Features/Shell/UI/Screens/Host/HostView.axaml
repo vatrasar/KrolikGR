@@ -6,7 +6,7 @@
                      xmlns:vm="using:KrolikGR.Src.Features.Shell.UI.Screens.Host"
                      xmlns:rxui="http://reactiveui.net"
                      xmlns:material="using:Material.Icons.Avalonia"
-                     xmlns:components="using:KrolikGR.Src.Shared.GlobalComponents"
+                     xmlns:components="using:KrolikGR.Src.Shared.GlobalComponents.RunningBorder"
                      x:Class="KrolikGR.Src.Features.Shell.UI.Screens.Host.HostView"
                      >
                      
