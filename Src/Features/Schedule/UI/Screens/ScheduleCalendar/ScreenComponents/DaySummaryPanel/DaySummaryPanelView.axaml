@@ -49,12 +49,14 @@
             <!-- Actions -->
             <StackPanel Spacing="8">
                 <!-- Using Primary Button Style if available, fallback to default -->
-                <Button Content="Dodaj załogę" 
+                <Button x:Name="AddCrewButton"
+                        Content="Dodaj załogę" 
                         HorizontalAlignment="Stretch" 
                         HorizontalContentAlignment="Center"
                         Classes="Primary" />
                 
-                <Button Content="Pokaż szczegóły dnia" 
+                <Button x:Name="ShowDayDetailsButton"
+                        Content="Pokaż szczegóły dnia" 
                         HorizontalAlignment="Stretch" 
                         HorizontalContentAlignment="Center" />
             </StackPanel>

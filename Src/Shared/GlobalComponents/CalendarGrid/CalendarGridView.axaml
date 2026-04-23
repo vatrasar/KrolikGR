@@ -13,7 +13,8 @@
         
         <!-- Header: Month/Year navigation -->
         <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto" Margin="0,0,0,16">
-            <Button Grid.Column="0" 
+            <Button x:Name="PreviousMonthButton"
+                    Grid.Column="0" 
                     Command="{Binding PreviousMonthCommand}"
                     Classes="Ghost" 
                     Theme="{DynamicResource TransparentButton}">
@@ -27,7 +28,8 @@
                        HorizontalAlignment="Center" 
                        VerticalAlignment="Center" />
             
-            <Button Grid.Column="2" 
+            <Button x:Name="NextMonthButton"
+                    Grid.Column="2" 
                     Command="{Binding NextMonthCommand}"
                     Classes="Ghost" 
                     Theme="{DynamicResource TransparentButton}">
@@ -48,7 +50,7 @@
         </Grid>
 
         <!-- Calendar Days Grid -->
-        <ItemsControl Grid.Row="2" ItemsSource="{Binding Days}">
+        <ItemsControl x:Name="DaysItemsControl" Grid.Row="2" ItemsSource="{Binding Days}">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="7" Rows="6" />
