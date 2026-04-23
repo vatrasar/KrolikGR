@@ -18,6 +18,8 @@ Correct Pattern:
 
 ```csharp
 //...
+using System.Reactive.Linq;
+using ReactiveUI;
 using ReactiveUI.SourceGenerators;
 
 //...
@@ -28,7 +30,7 @@ public partial class ExampleViewModel : ViewModelBase
     private string _firstName = string.Empty;
 
     [ObservableAsProperty]
-    private string _fullName = string.Empty;
+    private string? _fullName;
 
     // ✅ The generator creates "public IReactiveCommand SaveCommand"
     [ReactiveCommand]
@@ -42,42 +44,8 @@ public partial class ExampleViewModel : ViewModelBase
     {
         this.WhenAnyValue(x => x.FirstName)
             .Select(name => $"User: {name}")
-            .ToPropertyEx(this, x => x.FullName);
+            .ToProperty(this, x => x.FullName);
     }
 }
 ```
 
-## UI Animations and Timers
-
-Using `DispatcherTimer` for creating high-frequency UI animations (e.g., rotating brushes, moving elements at 60 FPS) is strictly forbidden. This approach is legacy, inefficient, and not synchronized with the screen refresh rate (VSync).
-
-- **Animations:** Use Avalonia's built-in `Animation` class with `KeyFrames` or `Transitions` for property-based animations.
-- **Continuous Updates:** If you must perform custom rendering updates from code-behind, use `CompositionTarget.Rendering` or `TopLevel.RequestAnimationFrame` to ensure the logic ticks in sync with the display's VSync.
-
-Correct Pattern (Animation API):
-
-```csharp
-// Use Avalonia's Animation system instead of DispatcherTimer
-private void StartModernAnimation()
-{
-    var animation = new Animation
-    {
-        Duration = TimeSpan.FromSeconds(2),
-        IterationCount = IterationCount.Infinite,
-        Children =
-        {
-            new KeyFrame
-            {
-                Cue = new Cue(0d),
-                Setters = { new Setter(RotateTransform.AngleProperty, 0.0) }
-            },
-            new KeyFrame
-            {
-                Cue = new Cue(1d),
-                Setters = { new Setter(RotateTransform.AngleProperty, 360.0) }
-            }
-        }
-    };
-    _animationInstance = animation.RunAsync(animatedElement);
-}
-```
