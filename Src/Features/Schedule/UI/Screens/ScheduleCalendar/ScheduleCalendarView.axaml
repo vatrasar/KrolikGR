@@ -18,7 +18,6 @@
         
         <!-- Day Summary Panel Container -->
         <Border Grid.Column="1" 
-                Width="320"
                 Classes.hidden="{Binding SelectedDay, Converter={x:Static ObjectConverters.IsNull}}">
             <Border.Styles>
                 <Style Selector="Border.hidden">
