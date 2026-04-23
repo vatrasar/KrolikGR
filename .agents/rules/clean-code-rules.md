@@ -9,7 +9,7 @@ trigger: always_on
 
 3. Names should be self-explanatory and communicate intent. Prioritize clarity over brevity, but avoid redundancy and noise words. A name should be as short as possible, but not shorter than what is required to understand its purpose at a glance. For example, numberOfRemainingFreeHours is far superior to h. It is better to have a descriptive, long name than an ambiguous one that fails to communicate intent. 
 
-4. Regard comments within a function or method body as a code smell. Logic should be so clear and names so expressive that internal comments are redundant. Use XML Documentation comments (///) only for public APIs or complex business rules, but even then, prioritize making the code self-documenting through better naming and structure
+4. Adding comments within a function or method body is strictly forbidden. Logic should be so clear and names so expressive that internal comments are redundant. You still can use XML Documentation comments (///) on top of fucntion/method, but even then, prioritize making the code self-documenting through better naming and structure. 
 
 5. Services should remain lean. If a service is unlikely to maintain high cohesion, prefer Use Cases over generic Services
 

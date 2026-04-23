@@ -59,17 +59,16 @@ public partial class CalendarGridViewModel : ViewModelBase
     {
         var days = new List<CalendarDay>();
         var firstDayOfMonth = new DateTime(CurrentMonth.Year, CurrentMonth.Month, 1);
-        var daysInMonth = DateTime.DaysInMonth(CurrentMonth.Year, CurrentMonth.Month);
         
-        // C# DayOfWeek starts at Sunday = 0. Polish week starts at Monday = 1.
         int firstDayOfWeek = (int)firstDayOfMonth.DayOfWeek;
-        int offset = firstDayOfWeek == 0 ? 6 : firstDayOfWeek - 1; // Days to subtract to get to previous Monday
+        int daysBeforeMonthStarts = firstDayOfWeek == 0 ? 6 : firstDayOfWeek - 1;
 
-        var startDate = firstDayOfMonth.AddDays(-offset);
+        var startDate = firstDayOfMonth.AddDays(-daysBeforeMonthStarts);
         
-        // 42 days (6 weeks) to ensure we always have enough space for any month shape
-        var random = new Random(CurrentMonth.Month); // Stable random for same month
-        for (int i = 0; i < 42; i++)
+        var random = new Random(CurrentMonth.Month); 
+        const int totalDaysInGrid = 42;
+
+        for (int i = 0; i < totalDaysInGrid; i++)
         {
             var date = startDate.AddDays(i);
             var isCurrentMonth = date.Month == CurrentMonth.Month;

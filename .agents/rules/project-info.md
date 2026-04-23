@@ -28,13 +28,12 @@ User Interface: App will be used in polish McDonald so the UI presented to the u
 
 ## Screen
 
-When in instruction for you I use the word "screen", I mean 3 files:
-NameViewModel.cs, NameView.axaml.cs, NameView.axaml.
-So, for example, when I say "screen malpa", I mean the files MalpaViewModel.cs, MalpaView.axaml.cs, and MalpaView.axaml.
+When in instruction for you I use the word "screen", I mean 4 files:
+NameViewModel.cs, NameView.axaml.cs, NameView.axaml and Screen.md.
+So, for example, when I say "screen malpa", I mean the files MalpaViewModel.cs, MalpaView.axaml.cs, MalpaView.axaml and Screen.md.
 The files are usually grouped in a single folder and are responsible for the UI of one screen.
 
 Inside screen folder there may be folder ScreenComponents where you can put folders of components used only by this 
-
 
 ## Components
 
@@ -44,8 +43,6 @@ There are two types of components you must distinguish:
 
 1. **Smart Components:** They have their own complex logic, state, or actions. They require a full MVVM triad (e.g., `NameViewModel.cs` inheriting from `ViewModelBase`, `NameView.axaml`, and `NameView.axaml.cs`).
 2. **Dumb Components (Stateless):** They only display data and have no complex logic. They do NOT have their own ViewModel file. They consist only of `NameView.axaml` and `NameView.axaml.cs`, using `x:DataType` bound directly to a Model or a property of the parent's ViewModel.
-
- 
 
 # Folders architecture
 
@@ -268,7 +265,6 @@ Custom components should by default be placed in ScreenComponents. You can place
 
 When a Screen (Parent) contains a Smart Component (Child), the communication MUST strictly follow ReactiveUI patterns to avoid tight coupling. 
 
-
 1. **NO Direct Reference:** A Child ViewModel MUST NOT know about its Parent. Never inject the Parent ViewModel into the Child ViewModel.
 2. **NO MessageBus:** Do NOT use ReactiveUI `MessageBus` for Parent-Child communication. It is reserved ONLY for decoupled global events.
 
@@ -277,5 +273,25 @@ When a Screen (Parent) contains a Smart Component (Child), the communication MUS
 1. **Observing State (WhenAnyValue):** If the Child manages state (e.g., `SelectedEmployee`), expose it as a `[Reactive]` property. 
 2. **Observing Actions (ReactiveCommand):** If the Child performs an action (e.g., clicking a 'Delete' button), the Child MUST expose a `ReactiveCommand`.
 
-# Screens and models 
+
+
+# Screens
+
+## Screens and models
+
 File with  model can only be at the feature or core level. You can't put models in the screens folder
+
+
+
+Custom components should by default be placed in ScreenComponents. You can place them in FeatureComponents or GlobalComponents only when i will directly tell you to do that. 
+
+## Screen.md
+
+Every screen folder MUST contain a Screen.md file. This file should contain documentation about the screen, including:
+
+- Purpose of the screen (what it does).
+- List of functionalities and features available on this screen.
+- Information about key UI elements (e.g., buttons that trigger specific actions like theme switching).
+- Any other relevant information for developers or AI agents to understand the screen's role.
+
+**IMPORTANT:** Whenever you modify a screen (logic, UI, or functionalities), you MUST update the corresponding `Screen.md` file to reflect these changes. Documentation must always stay in sync with the implementation.
