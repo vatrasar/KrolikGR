@@ -5,10 +5,10 @@ trigger: always_on
 # Theme and colors
 
 The application use the **FluentTheme** design system with custom palettes defined in the project.
-*   **Prohibition of Hardcoded Colors:** DO NOT use hex codes (e.g., `#FFFFFF`) or named colors (e.g., `Red`, `Blue`) directly in XAML or code. Use theme resources instead.
-*   **Dynamic Resources:** Always use `{DynamicResource}` for brushes and colors to ensure compatibility with Light/Dark mode switching.
-*   **Custom Colors:** If a unique color is absolutely necessary (e.g., for specific status indicators), it must be added to Shared/GlobalStyles/Colors.axaml
 
+* **Prohibition of Hardcoded Colors:** DO NOT use hex codes (e.g., `#FFFFFF`) or named colors (e.g., `Red`, `Blue`) directly in XAML or code. Use theme resources instead.
+* **Dynamic Resources:** Always use `{DynamicResource}` for brushes and colors to ensure compatibility with Light/Dark mode switching.
+* **Custom Colors:** If a unique color is absolutely necessary (e.g., for specific status indicators), it must be added to Shared/GlobalStyles/Colors.axaml
 
 # Icons
 
@@ -31,27 +31,50 @@ You have installed Material.Icons.Avalonia and Avalonia.Fluent.Icons so you can 
 
 # Styles separation from views
 
-* NEVER use inline `<UserControl.Styles>` or `<Window.Styles>` directly inside View files (like UserControl or Window).
+* NEVER use inline `<UserControl.Styles>` or `<Window.Styles>` or <ANYBuidlInControl.Styles>` directly inside View files (like UserControl or Window).
 * ALL styles MUST be extracted to dedicated `.axaml` files in the appropriate `Styles` directory (FeatureStyles, GlobalStyles or ScreenStyles).
 * In the View file, you are ONLY allowed to import styles using `<StyleInclude Source="..." />`.
 * DO NOT ignore this rule even for small, one-off styles. 
+
+# AvaloniaUI: Dependency Property Value Precedence (STRICT BAN on mixing local values with dynamic styles)
+
+**RULE:** In AvaloniaUI, values set locally directly on the control tag (e.g., `<Border Width="720">`) HAVE THE HIGHEST PRECEDENCE and will permanently override any values set inside `<Style>` blocks. 
+
+If any property (e.g., `Width`, `Height`, `Opacity`, `Background`, `Margin`) needs to be dynamically modified using style classes (e.g., `Classes.hidden="{Binding...}"` or pseudo-classes like `:pointerover`), **YOU MUST NOT** assign its value locally on the control tag.
+
+**WHY:** The local value completely blocks the styling engine for that specific property. The UI framework stops evaluating at the tag level and ignores the logic hidden inside the style selectors.
+
+**🔴 BAD (Legacy / Bug-prone):**
+
+```xml
+<Border Width="720" Classes.hidden="{Binding IsHidden}">
+    <Border.Styles>
+        <Style Selector="Border.hidden">
+            <Setter Property="Width" Value="0" />
+        </Style>
+    </Border.Styles>
+</Border>
+```
 
 # ControlTheme
 
 * Control themes should be placed in same folders as styles
 * files with ControlThemes should have suffix "ControlTheme" for example MalpaControlTheme.axaml
 
-
 # 🧩 Layout & Dimensioning Philosophy (Logic Over Values)
 
 1. **Layout-First Approach:**
+   
    - Prioritize **Fluid Layouts** over fixed dimensions. If a layout goal can be achieved using `Grid` (star/auto sizing), `StackPanel` (with `Spacing`), or `DockPanel`, you MUST choose that over hardcoded `Width`/`Height`.
    - Use `HorizontalAlignment="Stretch"` and `VerticalAlignment="Stretch"` as the default behavior for containers.
 
 2. **Smart Hardcoding (The "Pragmatic Developer" Rule):**
+   
    - **Spacing & Gaps:** Hardcoded values for `Margin`, `Padding`, and `Spacing` are perfectly fine for fine-tuning the UI. 
    - **Constraint Over Definition:** Use `MaxWidth` or `MinWidth` to control the visual flow on large screens, rather than a hardcoded `Width`. It’s better to say "this sidebar shouldn't exceed 300px" than to say "this sidebar IS 300px".
 
 3. **Anti-Pattern Warning (Margin Abuse):**
+   
    - NEVER use large margins or paddings to "push" or "center" elements (e.g., `Margin="0,0,500,0"`), you should use layouts instead of that
+
 4. Use `Grid` for complex, multi-dimensional layouts where `StackPanel` would require excessive nesting.
