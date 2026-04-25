@@ -1,6 +1,6 @@
 ---
 name: animations-rules
-description: Use this skill when you need to create or edit UI animations. 
+description: Use this skill when you need to create or edit UI animations 
 ---
 
 ## When to use this skill
