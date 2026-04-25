@@ -1,11 +1,13 @@
-<UserControl xmlns="https://github.com/avaloniaui"
+<rxui:ReactiveUserControl x:TypeArguments="local:CalendarGridViewModel"
+             x:DataType="local:CalendarGridViewModel"
+             xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="using:KrolikGR.Src.Shared.GlobalComponents.CalendarGrid"
              xmlns:tile="using:KrolikGR.Src.Shared.GlobalComponents.CalendarDayTile"
              xmlns:models="using:KrolikGR.Src.Core.Models.Calendar"
              xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+             xmlns:rxui="http://reactiveui.net"
              x:Class="KrolikGR.Src.Shared.GlobalComponents.CalendarGrid.CalendarGridView"
-             x:DataType="local:CalendarGridViewModel"
              x:Name="CalendarGridRoot"
              Background="Transparent">
 
@@ -80,4 +82,4 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
     </Grid>
-</UserControl>
+</rxui:ReactiveUserControl>

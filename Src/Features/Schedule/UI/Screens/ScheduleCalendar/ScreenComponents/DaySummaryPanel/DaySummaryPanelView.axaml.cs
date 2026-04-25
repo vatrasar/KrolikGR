@@ -1,5 +1,8 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using System.Windows.Input;
+using KrolikGR.Src.Core.Models.Calendar;
 
 namespace KrolikGR.Src.Features.Schedule.UI.Screens.ScheduleCalendar.ScreenComponents.DaySummaryPanel;
 
@@ -10,14 +13,14 @@ namespace KrolikGR.Src.Features.Schedule.UI.Screens.ScheduleCalendar.ScreenCompo
 /// Displays detailed staffing information for a selected day. It acts as a side panel or detail view within the schedule calendar screen.
 /// 
 /// ## Usage
-/// This is a **Dumb Component (Stateless)** and binds directly to a `CalendarDay` model.
+/// This is a **Dumb Component (Stateless)**. Data and commands are injected via `StyledProperty` bindings.
 /// 
 /// ### Properties / Bindings
-/// - `DataContext`: Must be an instance of `KrolikGR.Src.Core.Models.Calendar.CalendarDay`.
-/// - `Date`: Displays the full date (e.g., "23 kwietnia 2026").
-/// - `CrewPercentage`, `ManagersPercentage`, `MaintenancePercentage`: Bind to progress bars for specific roles.
+/// - `SelectedDay` (`CalendarDay?`): The day data to display. Set from the parent's ViewModel.
+/// - `CloseCommand` (`ICommand?`): Command to collapse/hide the summary panel. Set from the parent's ViewModel.
 /// 
 /// ## Key UI Elements
+/// - `CloseButton` (Button): Triggers `CloseCommand` to collapse the panel.
 /// - `AddCrewButton` (Button): Action to add crew members to the schedule.
 /// - `ShowDayDetailsButton` (Button): Navigates to a more detailed view of the day's schedule.
 /// - Staffing ProgressBars: Visual representation of coverage for different roles.
@@ -27,6 +30,26 @@ namespace KrolikGR.Src.Features.Schedule.UI.Screens.ScheduleCalendar.ScreenCompo
 /// </summary>
 public partial class DaySummaryPanelView : UserControl
 {
+    public static readonly StyledProperty<CalendarDay?> SelectedDayProperty =
+        AvaloniaProperty.Register<DaySummaryPanelView, CalendarDay?>(nameof(SelectedDay));
+
+    public static readonly StyledProperty<ICommand?> CloseCommandProperty =
+        AvaloniaProperty.Register<DaySummaryPanelView, ICommand?>(nameof(CloseCommand));
+
+
+    public CalendarDay? SelectedDay
+    {
+        get => GetValue(SelectedDayProperty);
+        set => SetValue(SelectedDayProperty, value);
+    }
+
+    public ICommand? CloseCommand
+    {
+        get => GetValue(CloseCommandProperty);
+        set => SetValue(CloseCommandProperty, value);
+    }
+
+
     public DaySummaryPanelView()
     {
         InitializeComponent();

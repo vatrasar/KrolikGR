@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reactive;
 using System.Reactive.Linq;
 using ReactiveUI;
 using ReactiveUI.SourceGenerators;
@@ -24,9 +22,6 @@ public partial class CalendarGridViewModel : ViewModelBase
     [ObservableAsProperty]
     private string? _monthNameYear;
 
-    public ReactiveCommand<CalendarDay, Unit> SelectDayCommand { get; }
-    public ReactiveCommand<Unit, Unit> PreviousMonthCommand { get; }
-    public ReactiveCommand<Unit, Unit> NextMonthCommand { get; }
 
     public CalendarGridViewModel()
     {
@@ -38,41 +33,45 @@ public partial class CalendarGridViewModel : ViewModelBase
 
         this.WhenAnyValue(x => x.CurrentMonth)
             .Subscribe(_ => GenerateDays());
+    }
 
-        SelectDayCommand = ReactiveCommand.Create<CalendarDay>(day =>
-        {
-            SelectedDay = day;
-        });
 
-        PreviousMonthCommand = ReactiveCommand.Create(() =>
-        {
-            CurrentMonth = CurrentMonth.AddMonths(-1);
-        });
+    [ReactiveCommand]
+    private void SelectDay(CalendarDay day)
+    {
+        SelectedDay = day;
+    }
 
-        NextMonthCommand = ReactiveCommand.Create(() =>
-        {
-            CurrentMonth = CurrentMonth.AddMonths(1);
-        });
+    [ReactiveCommand]
+    private void PreviousMonth()
+    {
+        CurrentMonth = CurrentMonth.AddMonths(-1);
+    }
+
+    [ReactiveCommand]
+    private void NextMonth()
+    {
+        CurrentMonth = CurrentMonth.AddMonths(1);
     }
 
     private void GenerateDays()
     {
         var days = new List<CalendarDay>();
         var firstDayOfMonth = new DateTime(CurrentMonth.Year, CurrentMonth.Month, 1);
-        
+
         int firstDayOfWeek = (int)firstDayOfMonth.DayOfWeek;
         int daysBeforeMonthStarts = firstDayOfWeek == 0 ? 6 : firstDayOfWeek - 1;
 
         var startDate = firstDayOfMonth.AddDays(-daysBeforeMonthStarts);
-        
-        var random = new Random(CurrentMonth.Month); 
+
+        var random = new Random(CurrentMonth.Month);
         const int totalDaysInGrid = 42;
 
         for (int i = 0; i < totalDaysInGrid; i++)
         {
             var date = startDate.AddDays(i);
             var isCurrentMonth = date.Month == CurrentMonth.Month;
-            
+
             days.Add(new CalendarDay
             {
                 Date = date,

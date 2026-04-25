@@ -16,8 +16,6 @@ The application use the **FluentTheme** design system with custom palettes defin
 
 You have installed Material.Icons.Avalonia and Avalonia.Fluent.Icons so you can use them for icons
 
-
-
 ## Styles folders
 
 - Files with styles related to feature should be placed in UI/FeatureStyles folder of feature.
@@ -73,7 +71,7 @@ If any property (e.g., `Width`, `Height`, `Opacity`, `Background`, `Margin`) nee
 **🔴 BAD (Legacy / Bug-prone):**
 
 ```xml
-<Border Width="720" Classes.hidden="{Binding IsHidden}">
+<Border Width="720" >
     <Border.Styles>
         <Style Selector="Border.hidden">
             <Setter Property="Width" Value="0" />
@@ -100,12 +98,12 @@ If any property (e.g., `Width`, `Height`, `Opacity`, `Background`, `Margin`) nee
 
 ```xml
 <Button x:Name="SaveUserButton" Content="Zapisz" />
-<ItemsControl x:Name="DaysItemsControl" ItemsSource="{Binding Days}" />
+<ItemsControl x:Name="DaysItemsControl" />
 ```
 
 ### ❌ bad:
 
 ```xml
 <Button Content="Zapisz" />
-<ItemsControl ItemsSource="{Binding Days}" />
+<ItemsControl  />
 ```

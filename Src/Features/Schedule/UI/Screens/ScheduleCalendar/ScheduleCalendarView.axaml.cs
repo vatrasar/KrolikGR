@@ -33,6 +33,12 @@ namespace KrolikGR.Src.Features.Schedule.UI.Screens.ScheduleCalendar;
 /// - **Components**: 
 ///     - Uses `CalendarGridView` (Global Component).
 ///     - Uses `DaySummaryPanelView` (Dumb Screen Component).
+/// 
+/// ## Navigation (From)
+/// - **HostView** — pushed programmatically onto the `Router.NavigationStack` during `HostViewModel` initialization.
+/// 
+/// ## Navigation (To)
+/// - None — no outgoing navigation is currently implemented.
 /// </summary>
 public partial class ScheduleCalendarView : ReactiveUserControl<ScheduleCalendarViewModel>
 {

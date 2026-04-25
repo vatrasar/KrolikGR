@@ -26,4 +26,10 @@ public partial class ScheduleCalendarViewModel : ViewModelBase, IRoutableViewMod
         this.WhenAnyValue(x => x.CalendarGrid.SelectedDay)
             .Subscribe(day => SelectedDay = day);
     }
+
+    [ReactiveCommand]
+    private void CloseSummary()
+    {
+        CalendarGrid.SelectedDay = null;
+    }
 }

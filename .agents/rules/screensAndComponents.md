@@ -57,22 +57,34 @@ Every component MUST contain documentation in a comment at the top of the class 
 
 Custom components should by default be placed in ScreenComponents. You can place them in FeatureComponents or GlobalComponents only when i will directly tell you to do that.
 
-### Communication with parent
+#### Component Communication and XAML Binding Rules
 
-When a Screen (Parent) contains a Smart Component (Child), the communication MUST strictly follow ReactiveUI patterns to avoid tight coupling.
+1. **Smart Components (Components with their own ViewModel)**
 
-1. **NO Direct Reference:** A Child ViewModel MUST NOT know about its Parent. Never inject the Parent ViewModel into the Child ViewModel.
-2. **NO MessageBus:** Do NOT use ReactiveUI `MessageBus` for Parent-Child communication. It is reserved ONLY for decoupled global events.
+When a Screen (Parent) contains a Smart Component (Child), communication MUST strictly follow ReactiveUI patterns to avoid tight coupling.
 
-**Allowed Communication Methods:**
+* **NO Direct Reference:** A Child ViewModel MUST NOT know about its Parent. Never inject the Parent ViewModel into the Child ViewModel.
+* **NO MessageBus:** Do NOT use ReactiveUI MessageBus for Parent-Child communication. It is reserved ONLY for decoupled global events.
+* **Observing State & Actions:** If the Child manages state, expose it as a `[Reactive]` property. If it performs an action, expose a `ReactiveCommand`. The parent observes these.
+2. **Dumb Components (Stateless Views without a ViewModel)**
 
-1. **Observing State (WhenAnyValue):** If the Child manages state (e.g., `SelectedEmployee`), expose it as a `[Reactive]` property.
-2. **Observing Actions (ReactiveCommand):** If the Child performs an action (e.g., clicking a 'Delete' button), the Child MUST expose a `ReactiveCommand`.
+Dumb components rely entirely on data passed from the parent view. Only way to pass this data is to set it as dataContext of dumb component. Never set parents viewModel as data context of control, control must stay isolated from parent
 
-### XAML Binding & Encapsulation Rules for Dumb Components
+* **NO Parent Hacking:** NEVER use `ElementName`, Named References (e.g., `#Root.DataContext`), or `$parent[SpecificParentView]` to escape a broken DataContext scope. This destroys component reusability.
+3. **Transition from Dumb to Smart Component**
+   
+   A Dumb Component MUST be promoted to a Smart Component (requiring its own ViewModel) if it needs to trigger actions that affect the Parent or broader application state. 
+   
+   - **Action Requirement Rule**: If a component contains interactive elements (e.g., Buttons, Toggles) that trigger logic beyond simple visual state changes, it MUST be a Smart Component.
+   - **No Code-Behind Events**: Do NOT use standard C# events in the code-behind (`.axaml.cs`) to communicate with the parent. 
+   - **ReactiveCommand Pattern**: Actions must be exposed via `ReactiveCommand` within a dedicated ViewModel. The Parent ViewModel then subscribes to these commands or observes the Child's ViewModel state.
+   - **Decision Matrix**: 
+     - Pure data display? -> **Dumb Component** (UserControl).
+     - Button that deletes a roster entry? -> **Smart Component** (ReactiveUserControl + ViewModel).
+     - Input that filters a list in real-time with complex logic? -> **Smart Component**.
+   
+   
 
-- **NEVER** bind a child component directly to a specific parent's `DataContext` or cast to a specific ViewModel type.
-- **FORBIDDEN SYNTAX:** Do not generate code like `Command="{Binding $parent[SpecificParentView].DataContext.(SpecificViewModel).Command}"`. This creates tight coupling and destroys component reusability.
-- **CORRECT APPROACH:** 1. Define a `StyledProperty<ICommand?>` (e.g., `CloseCommandProperty`) in the child component's code-behind (`.axaml.cs`).
-  2. In the child component's `.axaml`, bind inner elements to itself using relative source: `Command="{Binding $parent[local:MyChildControl].MyCommand}"`.
-  3. The parent view using the component must inject the command via the component's XML tag: `<local:MyChildControl MyCommand="{Binding ParentViewModelCommand}" />`.
+4. **Base Class Selection (ReactiveUI vs Standard Avalonia)**
+* **Smart Components & Screens:** Classes in the `.axaml.cs` file MUST inherit from `ReactiveUserControl<TViewModel>` (or `ReactiveWindow<TViewModel>`). Do NOT use a plain `UserControl` for these. You must update BOTH the root node in the `.axaml` file (including `x:TypeArguments`) and the class definition in the code-behind `.axaml.cs`.
+* **Dumb Components:** MUST inherit from the standard Avalonia `UserControl`. Do NOT use `ReactiveUserControl` for these, as they rely entirely on `StyledProperty` bindings and have no `TViewModel` to resolve.

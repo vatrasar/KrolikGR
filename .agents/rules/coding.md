@@ -1,5 +1,4 @@
 ---
-
 trigger: always_on
 
 ---
@@ -69,6 +68,16 @@ When your changes create orphans:
 
 Always use the `CancellationToken` pattern for canceling asynchronous operations or long-running tasks.
 Avoid useing boolean flags or direct `Task` disposal to stop asynchronous operations. Pass a `CancellationToken` to methods that support it.
+
+## Binding strategy
+
+* **Strict Prohibition**: Do not use `{Binding ...}` syntax in XAML (`.axaml`) files for dynamic data. - 
+
+* **Code-Behind Bindings**: All data bindings, command bindings, and event-to-command mappings must be implemented in the View's Code-Behind (`.axaml.cs`) using ReactiveUI's type-safe binding methods. -
+
+* **Required Pattern**: Use `this.Bind()`, `this.OneWayBind()`, and `this.BindCommand()` inside a `this.WhenActivated()` block. - 
+
+* **Memory Management**: Every binding must be followed by `.DisposeWith(disposables)` to ensure proper cleanup and prevent memory leaks.
 
 ## Anti legacy rules
 

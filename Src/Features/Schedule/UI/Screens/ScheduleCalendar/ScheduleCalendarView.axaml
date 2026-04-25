@@ -7,6 +7,7 @@
                            xmlns:components="using:KrolikGR.Src.Features.Schedule.UI.Screens.ScheduleCalendar.ScreenComponents.DaySummaryPanel"
                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                            xmlns:rxui="http://reactiveui.net"
+                           x:Name="Root"
                            x:Class="KrolikGR.Src.Features.Schedule.UI.Screens.ScheduleCalendar.ScheduleCalendarView">
 
     <UserControl.Styles>
@@ -24,7 +25,8 @@
         <Border Grid.Column="1" 
                 Classes="SummaryPanelContainer"
                 Classes.hidden="{Binding SelectedDay, Converter={x:Static ObjectConverters.IsNull}}">
-            <components:DaySummaryPanelView DataContext="{Binding SelectedDay}" />
+            <components:DaySummaryPanelView SelectedDay="{Binding SelectedDay}" 
+                                            CloseCommand="{Binding CloseSummaryCommand}" />
         </Border>
         
     </Grid>

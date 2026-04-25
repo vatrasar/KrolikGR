@@ -1,5 +1,5 @@
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
+using Avalonia.ReactiveUI;
+using ReactiveUI;
 
 namespace KrolikGR.Src.Shared.GlobalComponents.CalendarGrid;
 
@@ -26,20 +26,16 @@ namespace KrolikGR.Src.Shared.GlobalComponents.CalendarGrid;
 /// - `PreviousMonthButton` (Button): Triggers `PreviousMonthCommand`.
 /// - `NextMonthButton` (Button): Triggers `NextMonthCommand`.
 /// - `MonthYearText` (TextBlock): Displays the current month and year (e.g., "Kwiecień 2026").
-/// - `DaysItemsControl` (ItemsControl): Renders the grid of [CalendarDayTile](file:///home/vatrasar/projekty/KrolikGR/Src/Shared/GlobalComponents/CalendarDayTile/Component.md) components.
+/// - `DaysItemsControl` (ItemsControl): Renders the grid of [CalendarDayTile](file:///home/vatrasar/projekty/KrolikGR/Src/Shared/GlobalComponents/CalendarDayTile/CalendarDayTileView.axaml.cs) components.
 /// 
 /// ## Used In
 /// - [ScheduleCalendarView](file:///home/vatrasar/projekty/KrolikGR/Src/Features/Schedule/UI/Screens/ScheduleCalendar/ScheduleCalendarView.axaml)
 /// </summary>
-public partial class CalendarGridView : UserControl
+public partial class CalendarGridView : ReactiveUserControl<CalendarGridViewModel>
 {
     public CalendarGridView()
     {
         InitializeComponent();
-    }
-
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
+        this.WhenActivated(disposables => { });
     }
 }

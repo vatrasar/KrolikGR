@@ -24,6 +24,12 @@ namespace KrolikGR.Src.Features.Shell.UI.Screens.Host;
 /// - **ToggleThemeButton**: Changes the application's visual theme (Material Icons: Sunny/Night).
 /// - **Navigation Buttons**: Home, Account, Settings (currently placeholders).
 /// - **RoutedViewHost**: The area where the content of the active screen is rendered.
+/// 
+/// ## Navigation (From)
+/// - None — this is the root entry-point screen, loaded directly at application startup. It is not navigated to via routing.
+/// 
+/// ## Navigation (To)
+/// - **ScheduleCalendarView** — pushed directly onto the `Router.NavigationStack` during `HostViewModel` initialization.
 /// </summary>
 public partial class HostView : ReactiveUserControl<HostViewModel>
 {
