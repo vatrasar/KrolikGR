@@ -14,6 +14,6 @@ The component is a **Dumb Component (Stateless)** and binds directly to a `Calen
 
 ## Key UI Elements
 - `DateText` (TextBlock): Displays the numeric day of the month.
-- `FillProgressBar` (ProgressBar): Działa jako tło kafelka, wizualizując procent zapełnienia personelu ("efekt płynnej wody z animacją fali").
+- `FillProgressBar` (ProgressBar): Acts as a tile background, visualizing the staffing fill percentage. It uses a custom `WaterFillProgressBarTheme` with two layers of animated waves and a semi-transparent blue gradient.
 ## Used In
 - [CalendarGridView](file:///home/vatrasar/projekty/KrolikGR/Src/Shared/GlobalComponents/CalendarGrid/CalendarGridView.axaml)

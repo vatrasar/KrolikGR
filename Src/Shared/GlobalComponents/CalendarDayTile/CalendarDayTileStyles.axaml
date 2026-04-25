@@ -19,12 +19,12 @@
                             ClipToBounds="True">
                         <Panel x:Name="PART_Root">
                             <Border x:Name="PART_Indicator"
-                                    Background="{TemplateBinding Foreground}"
+                                    Background="Transparent"
                                     VerticalAlignment="Bottom"
                                     HorizontalAlignment="Stretch">
                                 <Panel>
                                     <!-- Wave 1 -->
-                                    <Path Data="M 0,10 C 25,0 75,20 100,10 C 125,0 175,20 200,10 C 225,0 275,20 300,10 V 30 H 0 Z"
+                                    <Path Data="M 0,10 C 25,0 75,20 100,10 C 125,0 175,20 200,10 C 225,0 275,20 300,10 V 1000 H 0 Z"
                                           Fill="{TemplateBinding Foreground}"
                                           Opacity="0.6"
                                           VerticalAlignment="Top"
@@ -49,7 +49,7 @@
                                     </Path>
 
                                     <!-- Wave 2 -->
-                                    <Path Data="M 0,10 C 30,20 70,0 100,10 C 130,20 170,0 200,10 C 230,20 270,0 300,10 V 30 H 0 Z"
+                                    <Path Data="M 0,10 C 30,20 70,0 100,10 C 130,20 170,0 200,10 C 230,20 270,0 300,10 V 1000 H 0 Z"
                                           Fill="{TemplateBinding Foreground}"
                                           Opacity="0.4"
                                           VerticalAlignment="Top"
