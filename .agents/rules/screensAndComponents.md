@@ -68,3 +68,11 @@ When a Screen (Parent) contains a Smart Component (Child), the communication MUS
 
 1. **Observing State (WhenAnyValue):** If the Child manages state (e.g., `SelectedEmployee`), expose it as a `[Reactive]` property.
 2. **Observing Actions (ReactiveCommand):** If the Child performs an action (e.g., clicking a 'Delete' button), the Child MUST expose a `ReactiveCommand`.
+
+### XAML Binding & Encapsulation Rules for Dumb Components
+
+- **NEVER** bind a child component directly to a specific parent's `DataContext` or cast to a specific ViewModel type.
+- **FORBIDDEN SYNTAX:** Do not generate code like `Command="{Binding $parent[SpecificParentView].DataContext.(SpecificViewModel).Command}"`. This creates tight coupling and destroys component reusability.
+- **CORRECT APPROACH:** 1. Define a `StyledProperty<ICommand?>` (e.g., `CloseCommandProperty`) in the child component's code-behind (`.axaml.cs`).
+  2. In the child component's `.axaml`, bind inner elements to itself using relative source: `Command="{Binding $parent[local:MyChildControl].MyCommand}"`.
+  3. The parent view using the component must inject the command via the component's XML tag: `<local:MyChildControl MyCommand="{Binding ParentViewModelCommand}" />`.
