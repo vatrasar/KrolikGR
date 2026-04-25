@@ -18,21 +18,21 @@
     </UserControl.Styles>
 
     <DockPanel>
-        <Border DockPanel.Dock="Left" 
+        <Border x:Name="MenuBorder"
+                DockPanel.Dock="Left" 
                 Classes="menuBorder"
-                Classes.collapsed="{Binding IsMenuCollapsed}"
                 BorderBrush="Gray" BorderThickness="0,0,1,0" Padding="10">
             <DockPanel>
-                <Button DockPanel.Dock="Bottom"
-                        Command="{Binding ToggleThemeCommand}"
+                <Button x:Name="ToggleThemeButton"
+                        DockPanel.Dock="Bottom"
                         Classes="menuButton"
                         HorizontalAlignment="Stretch"
                         HorizontalContentAlignment="Center">
-                    <material:MaterialIcon Kind="{Binding ThemeIcon}" Classes="menuIcon" Width="24" Height="24" />
+                    <material:MaterialIcon x:Name="ThemeIcon" Classes="menuIcon" Width="24" Height="24" />
                 </Button>
                 
                 <StackPanel Spacing="10">
-                    <Button Command="{Binding ToggleMenuCommand}" 
+                    <Button x:Name="ToggleMenuButton"
                             Classes="menuButton" 
                             HorizontalAlignment="Stretch">
                         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
@@ -68,7 +68,7 @@
         </Border>
 
 
-        <rxui:RoutedViewHost Router="{Binding Router}">
+        <rxui:RoutedViewHost x:Name="RoutedViewHost">
             <rxui:RoutedViewHost.PageTransition>
                 <CrossFade Duration="0:0:0.250" />
             </rxui:RoutedViewHost.PageTransition>

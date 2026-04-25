@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Reactive.Linq;
+using System.Reactive;
 using ReactiveUI;
 using ReactiveUI.SourceGenerators;
 using KrolikGR.Src.Core.Mvvm;
 using KrolikGR.Src.Core.Models.Calendar;
+using KrolikGR.Src.Shared.GlobalComponents.CalendarDayTile;
 
 namespace KrolikGR.Src.Shared.GlobalComponents.CalendarGrid;
 
@@ -14,7 +16,7 @@ public partial class CalendarGridViewModel : ViewModelBase
     private DateTime _currentMonth;
 
     [Reactive]
-    private IReadOnlyList<CalendarDay> _days = Array.Empty<CalendarDay>();
+    private IReadOnlyList<CalendarDayTileViewModel> _days = Array.Empty<CalendarDayTileViewModel>();
 
     [Reactive]
     private CalendarDay? _selectedDay;
@@ -37,12 +39,6 @@ public partial class CalendarGridViewModel : ViewModelBase
 
 
     [ReactiveCommand]
-    private void SelectDay(CalendarDay day)
-    {
-        SelectedDay = day;
-    }
-
-    [ReactiveCommand]
     private void PreviousMonth()
     {
         CurrentMonth = CurrentMonth.AddMonths(-1);
@@ -56,7 +52,7 @@ public partial class CalendarGridViewModel : ViewModelBase
 
     private void GenerateDays()
     {
-        var days = new List<CalendarDay>();
+        var tileViewModels = new List<CalendarDayTileViewModel>();
         var firstDayOfMonth = new DateTime(CurrentMonth.Year, CurrentMonth.Month, 1);
 
         int firstDayOfWeek = (int)firstDayOfMonth.DayOfWeek;
@@ -72,7 +68,7 @@ public partial class CalendarGridViewModel : ViewModelBase
             var date = startDate.AddDays(i);
             var isCurrentMonth = date.Month == CurrentMonth.Month;
 
-            days.Add(new CalendarDay
+            var day = new CalendarDay
             {
                 Date = date,
                 IsCurrentMonth = isCurrentMonth,
@@ -80,9 +76,17 @@ public partial class CalendarGridViewModel : ViewModelBase
                 CrewPercentage = isCurrentMonth ? random.Next(40, 100) : 0,
                 ManagersPercentage = isCurrentMonth ? random.Next(50, 100) : 0,
                 MaintenancePercentage = isCurrentMonth ? random.Next(30, 100) : 0
-            });
+            };
+
+            var tileVm = new CalendarDayTileViewModel(day);
+            
+            // Observe tile selection
+            tileVm.SelectDayCommand
+                .Subscribe(selectedDay => SelectedDay = selectedDay);
+
+            tileViewModels.Add(tileVm);
         }
 
-        Days = days;
+        Days = tileViewModels;
     }
 }

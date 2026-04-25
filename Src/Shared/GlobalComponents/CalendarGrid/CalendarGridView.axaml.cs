@@ -1,5 +1,6 @@
 using Avalonia.ReactiveUI;
 using ReactiveUI;
+using System.Reactive.Disposables;
 
 namespace KrolikGR.Src.Shared.GlobalComponents.CalendarGrid;
 
@@ -36,6 +37,19 @@ public partial class CalendarGridView : ReactiveUserControl<CalendarGridViewMode
     public CalendarGridView()
     {
         InitializeComponent();
-        this.WhenActivated(disposables => { });
+        this.WhenActivated(disposables => 
+        { 
+            this.OneWayBind(ViewModel, vm => vm.Days, v => v.DaysItemsControl.ItemsSource)
+                .DisposeWith(disposables);
+
+            this.OneWayBind(ViewModel, vm => vm.MonthNameYear, v => v.MonthYearText.Text)
+                .DisposeWith(disposables);
+
+            this.BindCommand(ViewModel, vm => vm.PreviousMonthCommand, v => v.PreviousMonthButton)
+                .DisposeWith(disposables);
+
+            this.BindCommand(ViewModel, vm => vm.NextMonthCommand, v => v.NextMonthButton)
+                .DisposeWith(disposables);
+        });
     }
 }

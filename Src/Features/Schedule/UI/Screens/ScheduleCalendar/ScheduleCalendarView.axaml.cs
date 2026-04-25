@@ -3,6 +3,9 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using ReactiveUI;
+using System.Reactive.Disposables;
+using System.Reactive.Linq;
+using System;
 
 namespace KrolikGR.Src.Features.Schedule.UI.Screens.ScheduleCalendar;
 
@@ -47,6 +50,18 @@ public partial class ScheduleCalendarView : ReactiveUserControl<ScheduleCalendar
         InitializeComponent();
         this.WhenActivated(disposables => 
         { 
+            this.WhenAnyValue(x => x.ViewModel!.CalendarGrid)
+                .Subscribe(vm => CalendarGrid.ViewModel = vm)
+                .DisposeWith(disposables);
+
+            this.WhenAnyValue(x => x.ViewModel!.SummaryPanel)
+                .Subscribe(vm => SummaryPanel.ViewModel = vm)
+                .DisposeWith(disposables);
+
+            this.WhenAnyValue(x => x.ViewModel!.SelectedDay)
+                .Select(day => day == null)
+                .Subscribe(isHidden => SummaryPanelContainer!.Classes.Set("hidden", isHidden))
+                .DisposeWith(disposables);
         });
     }
 }

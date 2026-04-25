@@ -17,14 +17,13 @@
         <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto" Margin="0,0,0,16">
             <Button x:Name="PreviousMonthButton"
                     Grid.Column="0" 
-                    Command="{Binding PreviousMonthCommand}"
                     Classes="Ghost" 
                     Theme="{DynamicResource TransparentButton}">
                 <materialIcons:MaterialIcon Kind="ChevronLeft" Width="24" Height="24" />
             </Button>
             
-            <TextBlock Grid.Column="1" 
-                       Text="{Binding MonthNameYear}" 
+            <TextBlock x:Name="MonthYearText"
+                       Grid.Column="1" 
                        FontSize="20" 
                        FontWeight="Bold" 
                        HorizontalAlignment="Center" 
@@ -32,7 +31,6 @@
             
             <Button x:Name="NextMonthButton"
                     Grid.Column="2" 
-                    Command="{Binding NextMonthCommand}"
                     Classes="Ghost" 
                     Theme="{DynamicResource TransparentButton}">
                 <materialIcons:MaterialIcon Kind="ChevronRight" Width="24" Height="24" />
@@ -52,32 +50,15 @@
         </Grid>
 
         <!-- Calendar Days Grid -->
-        <ItemsControl x:Name="DaysItemsControl" Grid.Row="2" ItemsSource="{Binding Days}">
+        <ItemsControl x:Name="DaysItemsControl" Grid.Row="2">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <UniformGrid Columns="7" Rows="6" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
-                <DataTemplate DataType="models:CalendarDay">
-                    <Button Command="{Binding #CalendarGridRoot.((local:CalendarGridViewModel)DataContext).SelectDayCommand}"
-                            CommandParameter="{Binding}"
-                            Background="Transparent"
-                            BorderThickness="0"
-                            Padding="0"
-                            HorizontalAlignment="Stretch"
-                            VerticalAlignment="Stretch"
-                            HorizontalContentAlignment="Stretch"
-                            VerticalContentAlignment="Stretch">
-                        <Button.Styles>
-                            <Style Selector="Button:pointerover /template/ ContentPresenter">
-                                <Setter Property="Background" Value="Transparent" />
-                            </Style>
-                        </Button.Styles>
-                        
-                        <tile:CalendarDayTileView />
-                        
-                    </Button>
+                <DataTemplate DataType="tile:CalendarDayTileViewModel">
+                    <tile:CalendarDayTileView />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

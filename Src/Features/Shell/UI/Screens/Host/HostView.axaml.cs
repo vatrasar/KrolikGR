@@ -4,6 +4,7 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using ReactiveUI;
+using System.Reactive.Disposables;
 
 namespace KrolikGR.Src.Features.Shell.UI.Screens.Host;
 
@@ -39,7 +40,21 @@ public partial class HostView : ReactiveUserControl<HostViewModel>
         InitializeComponent();
         this.WhenActivated(disposables => 
         { 
-            
+            this.OneWayBind(ViewModel, vm => vm.Router, v => v.RoutedViewHost.Router)
+                .DisposeWith(disposables);
+
+            this.BindCommand(ViewModel, vm => vm.ToggleMenuCommand, v => v.ToggleMenuButton)
+                .DisposeWith(disposables);
+
+            this.BindCommand(ViewModel, vm => vm.ToggleThemeCommand, v => v.ToggleThemeButton)
+                .DisposeWith(disposables);
+
+            this.WhenAnyValue(x => x.ViewModel!.IsMenuCollapsed)
+                .Subscribe(isCollapsed => MenuBorder!.Classes.Set("collapsed", isCollapsed))
+                .DisposeWith(disposables);
+
+            this.OneWayBind(ViewModel, vm => vm.ThemeIcon, v => v.ThemeIcon!.Kind)
+                .DisposeWith(disposables);
         });
     }
 

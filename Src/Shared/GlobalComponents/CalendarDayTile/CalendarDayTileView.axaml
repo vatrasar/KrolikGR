@@ -1,58 +1,72 @@
-<UserControl xmlns="https://github.com/avaloniaui"
+<rxui:ReactiveUserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:models="using:KrolikGR.Src.Core.Models.Calendar"
+             xmlns:local="using:KrolikGR.Src.Shared.GlobalComponents.CalendarDayTile"
+             xmlns:rxui="http://reactiveui.net"
              x:Class="KrolikGR.Src.Shared.GlobalComponents.CalendarDayTile.CalendarDayTileView"
-             x:DataType="models:CalendarDay"
-             x:Name="DayTileControl"
+             x:TypeArguments="local:CalendarDayTileViewModel"
+             x:DataType="local:CalendarDayTileViewModel"
              Background="Transparent">
-<UserControl.Styles>
+    <UserControl.Styles>
         <StyleInclude Source="avares://KrolikGR/Src/Shared/GlobalComponents/CalendarDayTile/CalendarDayTileStyles.axaml" />
     </UserControl.Styles>
     
-    <Border BorderBrush="{DynamicResource SystemControlBackgroundBaseLowBrush}" 
-            BorderThickness="1" 
-            CornerRadius="8" 
-            Margin="4" 
-            ClipToBounds="True"
-            Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
-            Classes.not-current-month="{Binding !IsCurrentMonth}">
-        <Border.Transitions>
-            <Transitions>
-                <DoubleTransition Property="Opacity" Duration="0:0:0.2" />
-            </Transitions>
-        </Border.Transitions>
-        
-        <Grid>
-            <!-- Liquid Fill Background using standard ProgressBar -->
-            <ProgressBar x:Name="FillProgressBar"
-                         Theme="{StaticResource WaterFillProgressBarTheme}"
-                         Orientation="Vertical" 
-                         Minimum="0" 
-                         Maximum="100" 
-                         Value="{Binding FillPercentage}" 
-                         Background="Transparent"
-                         BorderThickness="0"
-                         HorizontalAlignment="Stretch"
-                         VerticalAlignment="Stretch"
-                         ShowProgressText="False"
-                         CornerRadius="8"
-                         Opacity="0.6">
-                <ProgressBar.Foreground>
-                    <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
-                        <GradientStop Offset="0" Color="#44AAFF" />
-                        <GradientStop Offset="1" Color="#0073CF" />
-                    </LinearGradientBrush>
-                </ProgressBar.Foreground>
-            </ProgressBar>
+    <Button x:Name="SelectDayButton"
+            Background="Transparent"
+            BorderThickness="0"
+            Padding="0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            HorizontalContentAlignment="Stretch"
+            VerticalContentAlignment="Stretch">
+        <Button.Styles>
+            <Style Selector="Button:pointerover /template/ ContentPresenter">
+                <Setter Property="Background" Value="Transparent" />
+            </Style>
+        </Button.Styles>
 
-            <!-- Content -->
-            <Grid RowDefinitions="Auto, *, Auto" Margin="8">
-                <TextBlock x:Name="DateText" 
-                           Grid.Row="0" 
-                           Text="{Binding Date.Day}" 
-                           FontWeight="SemiBold" 
-                           FontSize="16" />
+        <Border x:Name="TileBorder"
+                BorderBrush="{DynamicResource SystemControlBackgroundBaseLowBrush}" 
+                BorderThickness="1" 
+                CornerRadius="8" 
+                Margin="4" 
+                ClipToBounds="True"
+                Background="{DynamicResource SystemControlBackgroundAltHighBrush}">
+            <Border.Transitions>
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.2" />
+                </Transitions>
+            </Border.Transitions>
+            
+            <Grid>
+                <!-- Liquid Fill Background using standard ProgressBar -->
+                <ProgressBar x:Name="FillProgressBar"
+                             Theme="{StaticResource WaterFillProgressBarTheme}"
+                             Orientation="Vertical" 
+                             Minimum="0" 
+                             Maximum="100" 
+                             Background="Transparent"
+                             BorderThickness="0"
+                             HorizontalAlignment="Stretch"
+                             VerticalAlignment="Stretch"
+                             ShowProgressText="False"
+                             CornerRadius="8"
+                             Opacity="0.6">
+                    <ProgressBar.Foreground>
+                        <LinearGradientBrush StartPoint="0%,0%" EndPoint="0%,100%">
+                            <GradientStop Offset="0" Color="#44AAFF" />
+                            <GradientStop Offset="1" Color="#0073CF" />
+                        </LinearGradientBrush>
+                    </ProgressBar.Foreground>
+                </ProgressBar>
+
+                <!-- Content -->
+                <Grid RowDefinitions="Auto, *, Auto" Margin="8">
+                    <TextBlock x:Name="DateText" 
+                               Grid.Row="0" 
+                               FontWeight="SemiBold" 
+                               FontSize="16" />
+                </Grid>
             </Grid>
-        </Grid>
-    </Border>
-</UserControl>
+        </Border>
+    </Button>
+</rxui:ReactiveUserControl>

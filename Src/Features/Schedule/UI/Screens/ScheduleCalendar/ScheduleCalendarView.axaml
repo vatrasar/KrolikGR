@@ -17,16 +17,15 @@
     <Grid ColumnDefinitions="*, Auto" Margin="24">
         
         <!-- Calendar Component -->
-        <global:CalendarGridView Grid.Column="0" 
-                                 DataContext="{Binding CalendarGrid}" 
+        <global:CalendarGridView x:Name="CalendarGrid"
+                                 Grid.Column="0" 
                                  Margin="0,0,16,0" />
         
         <!-- Day Summary Panel Container -->
-        <Border Grid.Column="1" 
-                Classes="SummaryPanelContainer"
-                Classes.hidden="{Binding SelectedDay, Converter={x:Static ObjectConverters.IsNull}}">
-            <components:DaySummaryPanelView SelectedDay="{Binding SelectedDay}" 
-                                            CloseCommand="{Binding CloseSummaryCommand}" />
+        <Border x:Name="SummaryPanelContainer"
+                Grid.Column="1" 
+                Classes="SummaryPanelContainer">
+            <components:DaySummaryPanelView x:Name="SummaryPanel" />
         </Border>
         
     </Grid>

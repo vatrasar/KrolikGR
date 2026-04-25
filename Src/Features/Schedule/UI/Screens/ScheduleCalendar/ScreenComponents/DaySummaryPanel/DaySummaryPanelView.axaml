@@ -1,9 +1,10 @@
-<UserControl xmlns="https://github.com/avaloniaui"
+<rxui:ReactiveUserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="using:KrolikGR.Src.Features.Schedule.UI.Screens.ScheduleCalendar.ScreenComponents.DaySummaryPanel"
+             xmlns:rxui="http://reactiveui.net"
              x:Class="KrolikGR.Src.Features.Schedule.UI.Screens.ScheduleCalendar.ScreenComponents.DaySummaryPanel.DaySummaryPanelView"
-             x:DataType="local:DaySummaryPanelView"
-             x:Name="Root"
+             x:TypeArguments="local:DaySummaryPanelViewModel"
+             x:DataType="local:DaySummaryPanelViewModel"
              Background="Transparent">
 
     <Border Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
@@ -16,7 +17,7 @@
             
             <StackPanel Grid.Row="0" Spacing="16">
                 <Grid ColumnDefinitions="*, Auto">
-                    <TextBlock Text="{Binding #Root.SelectedDay.Date, StringFormat={}{0:dd MMMM yyyy}}" 
+                    <TextBlock x:Name="DateText"
                                FontSize="20" 
                                FontWeight="Bold" 
                                VerticalAlignment="Center"/>
@@ -24,11 +25,10 @@
                     <Button x:Name="CloseButton"
                             Grid.Column="1" 
                             Classes="ClosePanelButton"
-                            Command="{Binding #Root.CloseCommand}"
                             VerticalAlignment="Center"
                             ToolTip.Tip="Zamknij">
-                        <Path Data="M 0 0 L 10 10 M 10 0 L 0 10" 
-                              Stroke="{Binding $parent[Button].Foreground}" 
+                        <Path x:Name="ClosePath"
+                              Data="M 0 0 L 10 10 M 10 0 L 0 10" 
                               StrokeThickness="1.5" 
                               Width="10" 
                               Height="10" />
@@ -43,23 +43,23 @@
                     <!-- Crew -->
                     <StackPanel Grid.Row="0" Grid.Column="0" Spacing="4" Margin="0,0,16,12">
                         <TextBlock Text="Załoga" FontSize="14" Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}" />
-                        <ProgressBar Minimum="0" Maximum="100" Value="{Binding #Root.SelectedDay.CrewPercentage}" Height="8" ShowProgressText="False" />
+                        <ProgressBar x:Name="CrewProgressBar" Minimum="0" Maximum="100" Height="8" ShowProgressText="False" />
                     </StackPanel>
-                    <TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding #Root.SelectedDay.CrewPercentage, StringFormat={}{0}%}" VerticalAlignment="Bottom" Margin="0,0,0,12" />
+                    <TextBlock x:Name="CrewPercentageText" Grid.Row="0" Grid.Column="1" VerticalAlignment="Bottom" Margin="0,0,0,12" />
                     
                     <!-- Managers -->
                     <StackPanel Grid.Row="1" Grid.Column="0" Spacing="4" Margin="0,0,16,12">
                         <TextBlock Text="Managerowie" FontSize="14" Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}" />
-                        <ProgressBar Minimum="0" Maximum="100" Value="{Binding #Root.SelectedDay.ManagersPercentage}" Height="8" ShowProgressText="False" Foreground="{DynamicResource SystemAccentColor}" />
+                        <ProgressBar x:Name="ManagersProgressBar" Minimum="0" Maximum="100" Height="8" ShowProgressText="False" Foreground="{DynamicResource SystemAccentColor}" />
                     </StackPanel>
-                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding #Root.SelectedDay.ManagersPercentage, StringFormat={}{0}%}" VerticalAlignment="Bottom" Margin="0,0,0,12" />
+                    <TextBlock x:Name="ManagersPercentageText" Grid.Row="1" Grid.Column="1" VerticalAlignment="Bottom" Margin="0,0,0,12" />
                     
                     <!-- Maintenance -->
                     <StackPanel Grid.Row="2" Grid.Column="0" Spacing="4" Margin="0,0,16,0">
                         <TextBlock Text="Sprzątacze" FontSize="14" Foreground="{DynamicResource SystemControlForegroundBaseMediumBrush}" />
-                        <ProgressBar Minimum="0" Maximum="100" Value="{Binding #Root.SelectedDay.MaintenancePercentage}" Height="8" ShowProgressText="False" Foreground="{DynamicResource SystemAccentColor}" />
+                        <ProgressBar x:Name="MaintenanceProgressBar" Minimum="0" Maximum="100" Height="8" ShowProgressText="False" Foreground="{DynamicResource SystemAccentColor}" />
                     </StackPanel>
-                    <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding #Root.SelectedDay.MaintenancePercentage, StringFormat={}{0}%}" VerticalAlignment="Bottom" />
+                    <TextBlock x:Name="MaintenancePercentageText" Grid.Row="2" Grid.Column="1" VerticalAlignment="Bottom" />
                 </Grid>
             </StackPanel>
             
@@ -80,4 +80,4 @@
             
         </Grid>
     </Border>
-</UserControl>
+</rxui:ReactiveUserControl>

@@ -1,6 +1,9 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using KrolikGR.Src.Core.Models.Calendar;
+using Avalonia.ReactiveUI;
+using ReactiveUI;
+using System.Reactive.Disposables;
+using System;
 
 namespace KrolikGR.Src.Shared.GlobalComponents.CalendarDayTile;
 
@@ -11,29 +14,40 @@ namespace KrolikGR.Src.Shared.GlobalComponents.CalendarDayTile;
 /// This component represents a single day tile within a calendar grid. It provides a visual representation of a specific date and its staffing status.
 /// 
 /// ## Usage
-/// The component is a **Dumb Component (Stateless)** and binds directly to a `CalendarDay` model.
+/// The component is a **Smart Component**. It binds to its ViewModel properties in the code-behind.
 /// 
 /// ### Properties / Bindings
-/// - `DataContext`: Must be an instance of `KrolikGR.Src.Core.Models.Calendar.CalendarDay`.
-/// - `Date.Day`: Displays the day of the month.
-/// - `FillPercentage`: Binds to a progress bar indicating overall staffing fill.
-/// - `IsCurrentMonth`: Used to dim tiles that belong to adjacent months.
+/// - `ViewModel.Day`: The `CalendarDay` model data.
+/// - `ViewModel.SelectDayCommand`: Command triggered when the tile is clicked.
 /// 
 /// ## Key UI Elements
 /// - `DateText` (TextBlock): Displays the numeric day of the month.
-/// - `FillProgressBar` (ProgressBar): Acts as a tile background, visualizing the staffing fill percentage. It uses a custom `WaterFillProgressBarTheme` with two layers of animated waves and a semi-transparent blue gradient.
+/// - `FillProgressBar` (ProgressBar): Visualizes the staffing fill percentage.
+/// - `SelectDayButton` (Button): Wraps the tile and triggers the selection command.
+/// 
 /// ## Used In
 /// - [CalendarGridView](file:///home/vatrasar/projekty/KrolikGR/Src/Shared/GlobalComponents/CalendarGrid/CalendarGridView.axaml)
 /// </summary>
-public partial class CalendarDayTileView : UserControl
+public partial class CalendarDayTileView : ReactiveUserControl<CalendarDayTileViewModel>
 {
     public CalendarDayTileView()
     {
         InitializeComponent();
-    }
+        this.WhenActivated(disposables =>
+        {
+            this.OneWayBind(ViewModel, vm => vm.Day.Date.Day, v => v.DateText.Text, 
+                day => day.ToString())
+                .DisposeWith(disposables);
 
-    private void InitializeComponent()
-    {
-        AvaloniaXamlLoader.Load(this);
+            this.OneWayBind(ViewModel, vm => vm.Day.FillPercentage, v => v.FillProgressBar.Value)
+                .DisposeWith(disposables);
+
+            this.WhenAnyValue(x => x.ViewModel!.Day.IsCurrentMonth)
+                .Subscribe(isCurrent => TileBorder!.Classes.Set("not-current-month", !isCurrent))
+                .DisposeWith(disposables);
+
+            this.BindCommand(ViewModel, vm => vm.SelectDayCommand, v => v.SelectDayButton)
+                .DisposeWith(disposables);
+        });
     }
 }
