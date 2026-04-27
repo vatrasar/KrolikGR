@@ -482,3 +482,16 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+#AI
+.agents/
+
+# OpenCode & Gemini CLI
+.opencode/
+.gemini/
+.claude/
+AGENTS.md
+GEMINI.md
+CLAUDE.md
+CONTEXT.md
+opencode.json
