@@ -47,24 +47,30 @@ public partial class DaySummaryPanelView : ReactiveUserControl<DaySummaryPanelVi
                 day => (double)(day?.CrewPercentage ?? 0))
                 .DisposeWith(disposables);
             
-            this.OneWayBind(ViewModel, vm => vm.SelectedDay, v => v.CrewPercentageText.Text,
-                day => day != null ? $"{day.CrewPercentage}%" : string.Empty)
+            this.WhenAnyValue(v => v.CrewProgressBar.Value)
+                .CombineLatest(this.WhenAnyValue(v => v.ViewModel!.SelectedDay), 
+                    (val, day) => day != null ? $"{(int)val}%" : string.Empty)
+                .BindTo(this, v => v.CrewPercentageText.Text)
                 .DisposeWith(disposables);
 
             this.OneWayBind(ViewModel, vm => vm.SelectedDay, v => v.ManagersProgressBar.Value,
                 day => (double)(day?.ManagersPercentage ?? 0))
                 .DisposeWith(disposables);
             
-            this.OneWayBind(ViewModel, vm => vm.SelectedDay, v => v.ManagersPercentageText.Text,
-                day => day != null ? $"{day.ManagersPercentage}%" : string.Empty)
+            this.WhenAnyValue(v => v.ManagersProgressBar.Value)
+                .CombineLatest(this.WhenAnyValue(v => v.ViewModel!.SelectedDay), 
+                    (val, day) => day != null ? $"{(int)val}%" : string.Empty)
+                .BindTo(this, v => v.ManagersPercentageText.Text)
                 .DisposeWith(disposables);
 
             this.OneWayBind(ViewModel, vm => vm.SelectedDay, v => v.MaintenanceProgressBar.Value,
                 day => (double)(day?.MaintenancePercentage ?? 0))
                 .DisposeWith(disposables);
             
-            this.OneWayBind(ViewModel, vm => vm.SelectedDay, v => v.MaintenancePercentageText.Text,
-                day => day != null ? $"{day.MaintenancePercentage}%" : string.Empty)
+            this.WhenAnyValue(v => v.MaintenanceProgressBar.Value)
+                .CombineLatest(this.WhenAnyValue(v => v.ViewModel!.SelectedDay), 
+                    (val, day) => day != null ? $"{(int)val}%" : string.Empty)
+                .BindTo(this, v => v.MaintenancePercentageText.Text)
                 .DisposeWith(disposables);
 
             this.BindCommand(ViewModel, vm => vm.ClosePanelCommand, v => v.CloseButton)

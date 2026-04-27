@@ -7,6 +7,10 @@
              x:DataType="local:DaySummaryPanelViewModel"
              Background="Transparent">
 
+    <UserControl.Styles>
+        <StyleInclude Source="avares://KrolikGR/Src/Features/Schedule/UI/Screens/ScheduleCalendar/ScreenComponents/DaySummaryPanel/DaySummaryPanelStyles.axaml" />
+    </UserControl.Styles>
+
     <Border Background="{DynamicResource SystemControlBackgroundAltHighBrush}"
             BorderBrush="{DynamicResource SystemControlBackgroundBaseLowBrush}"
             BorderThickness="1"
