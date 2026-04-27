@@ -1,0 +1,43 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <Style Selector="Border.TableHeader">
+        <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundBaseLowBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource SystemControlBackgroundBaseMediumBrush}" />
+        <Setter Property="BorderThickness" Value="0,0,1,1" />
+        <Setter Property="Padding" Value="8" />
+    </Style>
+    
+    <Style Selector="Border.TableCell">
+        <Setter Property="BorderBrush" Value="{DynamicResource SystemControlBackgroundBaseLowBrush}" />
+        <Setter Property="BorderThickness" Value="0,0,1,1" />
+        <Setter Property="Padding" Value="8" />
+        <Setter Property="MinHeight" Value="50" />
+    </Style>
+    
+    <Style Selector="TextBlock.HourText">
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+    
+    <Style Selector="TextBlock.RoleHeader">
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+
+    <Style Selector="Button.Back">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Padding" Value="8" />
+    </Style>
+    
+    <Style Selector="Button.Back:hover">
+        <Setter Property="Background" Value="{DynamicResource SystemControlBackgroundBaseLowBrush}" />
+    </Style>
+
+    <Style Selector="Border.TableHeader ComboBox">
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+</Styles>

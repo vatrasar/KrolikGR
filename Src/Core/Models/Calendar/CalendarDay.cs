@@ -10,4 +10,6 @@ public class CalendarDay
     public double CrewPercentage { get; set; }
     public double ManagersPercentage { get; set; }
     public double MaintenancePercentage { get; set; }
+    public int StaffCount { get; set; }
+    public int RequiredStaffCount { get; set; }
 }

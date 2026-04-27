@@ -75,7 +75,9 @@ public partial class CalendarGridViewModel : ViewModelBase
                 FillPercentage = isCurrentMonth ? random.Next(20, 100) : 0,
                 CrewPercentage = isCurrentMonth ? random.Next(40, 100) : 0,
                 ManagersPercentage = isCurrentMonth ? random.Next(50, 100) : 0,
-                MaintenancePercentage = isCurrentMonth ? random.Next(30, 100) : 0
+                MaintenancePercentage = isCurrentMonth ? random.Next(30, 100) : 0,
+                StaffCount = isCurrentMonth ? random.Next(2, 10) : 0,
+                RequiredStaffCount = isCurrentMonth ? random.Next(5, 12) : 0
             };
 
             var tileVm = new CalendarDayTileViewModel(day);

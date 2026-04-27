@@ -25,7 +25,7 @@ public partial class ScheduleCalendarViewModel : ViewModelBase, IRoutableViewMod
     {
         HostScreen = hostScreen;
         CalendarGrid = new CalendarGridViewModel();
-        SummaryPanel = new DaySummaryPanelViewModel();
+        SummaryPanel = new DaySummaryPanelViewModel(hostScreen);
 
         this.WhenAnyValue(x => x.CalendarGrid.SelectedDay)
             .Subscribe(day => 
