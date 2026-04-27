@@ -80,7 +80,6 @@ public partial class CalendarGridViewModel : ViewModelBase
 
             var tileVm = new CalendarDayTileViewModel(day);
             
-            // Observe tile selection
             tileVm.SelectDayCommand
                 .Subscribe(selectedDay => SelectedDay = selectedDay);
 

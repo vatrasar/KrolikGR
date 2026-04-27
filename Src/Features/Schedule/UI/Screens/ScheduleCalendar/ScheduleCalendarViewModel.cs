@@ -27,7 +27,6 @@ public partial class ScheduleCalendarViewModel : ViewModelBase, IRoutableViewMod
         CalendarGrid = new CalendarGridViewModel();
         SummaryPanel = new DaySummaryPanelViewModel();
 
-        // Sync selection from CalendarGrid to our property and then to SummaryPanel
         this.WhenAnyValue(x => x.CalendarGrid.SelectedDay)
             .Subscribe(day => 
             {
@@ -35,7 +34,6 @@ public partial class ScheduleCalendarViewModel : ViewModelBase, IRoutableViewMod
                 SummaryPanel.SelectedDay = day;
             });
 
-        // Observe the Close action from the child Smart Component
         SummaryPanel.ClosePanelCommand
             .Subscribe(_ => 
             {

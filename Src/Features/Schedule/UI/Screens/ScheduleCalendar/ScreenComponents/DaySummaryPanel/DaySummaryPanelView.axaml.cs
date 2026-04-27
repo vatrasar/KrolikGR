@@ -39,7 +39,6 @@ public partial class DaySummaryPanelView : ReactiveUserControl<DaySummaryPanelVi
         InitializeComponent();
         this.WhenActivated(disposables =>
         {
-            // Bind Selected Day properties using type-safe OneWayBind
             this.OneWayBind(ViewModel, vm => vm.SelectedDay, v => v.DateText.Text, 
                 day => day?.Date.ToString("dd MMMM yyyy"))
                 .DisposeWith(disposables);
@@ -68,7 +67,6 @@ public partial class DaySummaryPanelView : ReactiveUserControl<DaySummaryPanelVi
                 day => day != null ? $"{day.MaintenancePercentage}%" : string.Empty)
                 .DisposeWith(disposables);
 
-            // Bind Commands
             this.BindCommand(ViewModel, vm => vm.ClosePanelCommand, v => v.CloseButton)
                 .DisposeWith(disposables);
             
@@ -78,7 +76,6 @@ public partial class DaySummaryPanelView : ReactiveUserControl<DaySummaryPanelVi
             this.BindCommand(ViewModel, vm => vm.ShowDayDetailsCommand, v => v.ShowDayDetailsButton)
                 .DisposeWith(disposables);
 
-            // Bind Path Stroke to Button Foreground
             this.WhenAnyValue(x => x.CloseButton.Foreground)
                 .Subscribe(brush => ClosePath.Stroke = brush)
                 .DisposeWith(disposables);

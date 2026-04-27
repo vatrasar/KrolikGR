@@ -15,18 +15,15 @@ public partial class DaySummaryPanelViewModel : ViewModelBase
     [ReactiveCommand]
     private void ClosePanel()
     {
-        // The actual logic is handled by the parent observing this command
     }
 
     [ReactiveCommand]
     private void AddCrew()
     {
-        // Placeholder for add crew logic
     }
 
     [ReactiveCommand]
     private void ShowDayDetails()
     {
-        // Placeholder for show day details logic
     }
 }
