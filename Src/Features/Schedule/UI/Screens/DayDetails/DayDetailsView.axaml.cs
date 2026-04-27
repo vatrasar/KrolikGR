@@ -46,6 +46,15 @@ public partial class DayDetailsView : ReactiveUserControl<DayDetailsViewModel>
             this.BindCommand(ViewModel, vm => vm.GoBackCommand, v => v.BackButton)
                 .DisposeWith(disposables);
 
+            this.BindCommand(ViewModel, vm => vm.AddCrewCommand, v => v.AddCrewButton)
+                .DisposeWith(disposables);
+
+            this.BindCommand(ViewModel, vm => vm.AddManagerCommand, v => v.AddManagerButton)
+                .DisposeWith(disposables);
+
+            this.BindCommand(ViewModel, vm => vm.ShowShiftCrewCommand, v => v.ShowShiftCrewButton)
+                .DisposeWith(disposables);
+
             this.Bind(ViewModel, vm => vm.SelectedRole, v => v.RoleSelector.SelectedIndex,
                 role => (int)role,
                 index => (RoleType)index)

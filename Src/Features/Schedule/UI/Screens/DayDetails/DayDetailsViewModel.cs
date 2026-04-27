@@ -30,6 +30,21 @@ public partial class DayDetailsViewModel : ViewModelBase, IRoutableViewModel
         HostScreen.Router.NavigateBack.Execute(Unit.Default);
     }
 
+    [ReactiveCommand]
+    private void AddCrew()
+    {
+    }
+
+    [ReactiveCommand]
+    private void AddManager()
+    {
+    }
+
+    [ReactiveCommand]
+    private void ShowShiftCrew()
+    {
+    }
+
     public DayDetailsViewModel(IScreen hostScreen, CalendarDay? selectedDay = null)
     {
         HostScreen = hostScreen;
