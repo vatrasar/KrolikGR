@@ -485,3 +485,13 @@ $RECYCLE.BIN/
 
 #AI
 .agents/
+
+# OpenCode & Gemini CLI
+.opencode/
+.gemini/
+.claude/
+AGENTS.md
+GEMINI.md
+CLAUDE.md
+CONTEXT.md
+opencode.json
